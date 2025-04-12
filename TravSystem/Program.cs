@@ -1,4 +1,19 @@
+using Microsoft.EntityFrameworkCore;
+using MyEfCoreApp.Data;
+using System;
+using TravSystem.Data.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
+
+
+builder.Configuration.SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
+    .AddEnvironmentVariables();
+
+builder.Services.AddDbContext<TravellerDBContext>();
+
+builder.Services.AddScoped<ITPlanetRepository, TPlanetRepository>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

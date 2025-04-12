@@ -1,0 +1,84 @@
+﻿@model TravSystem.Models.TPlanet
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>TPlanet</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="SubSectorId" class="control-label"></label>
+                <input asp-for="SubSectorId" class="form-control" />
+                <span asp-validation-for="SubSectorId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PlanetId" class="control-label"></label>
+                <input asp-for="PlanetId" class="form-control" />
+                <span asp-validation-for="PlanetId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Orbit" class="control-label"></label>
+                <input asp-for="Orbit" class="form-control" />
+                <span asp-validation-for="Orbit" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StarportID" class="control-label"></label>
+                <input asp-for="StarportID" class="form-control" />
+                <span asp-validation-for="StarportID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Size" class="control-label"></label>
+                <input asp-for="Size" class="form-control" />
+                <span asp-validation-for="Size" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AtmosphereID" class="control-label"></label>
+                <input asp-for="AtmosphereID" class="form-control" />
+                <span asp-validation-for="AtmosphereID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HydrographicsID" class="control-label"></label>
+                <input asp-for="HydrographicsID" class="form-control" />
+                <span asp-validation-for="HydrographicsID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Population" class="control-label"></label>
+                <input asp-for="Population" class="form-control" />
+                <span asp-validation-for="Population" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GovernmentID" class="control-label"></label>
+                <input asp-for="GovernmentID" class="form-control" />
+                <span asp-validation-for="GovernmentID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LawLevelID" class="control-label"></label>
+                <input asp-for="LawLevelID" class="form-control" />
+                <span asp-validation-for="LawLevelID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TechLevelID" class="control-label"></label>
+                <input asp-for="TechLevelID" class="form-control" />
+                <span asp-validation-for="TechLevelID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

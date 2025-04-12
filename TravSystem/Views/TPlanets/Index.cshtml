@@ -1,0 +1,95 @@
+﻿@model IEnumerable<TravSystem.Models.TPlanet>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SubSectorId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlanetId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Orbit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StarportID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Size)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AtmosphereID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HydrographicsID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Population)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GovernmentID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LawLevelID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TechLevelID)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubSectorId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlanetId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Orbit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StarportID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Size)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AtmosphereID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HydrographicsID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Population)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GovernmentID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LawLevelID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TechLevelID)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
