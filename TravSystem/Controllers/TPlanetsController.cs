@@ -1,28 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyEfCoreApp.Data;
+using TravSystem.Data.Repositories;
 using TravSystem.Models;
 
 namespace TravSystem.Controllers
 {
     public class TPlanetsController : Controller
     {
-        private readonly TravellerDBContext _context;
+        private readonly ITPlanetRepository _repo;
 
-        public TPlanetsController(TravellerDBContext context)
+        public TPlanetsController(ITPlanetRepository repository)
         {
-            _context = context;
+            _repo = repository;
         }
 
         // GET: TPlanets
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Planets.ToListAsync());
+            return View(await _repo.GetAll());
         }
 
         // GET: TPlanets/Details/5
@@ -33,8 +29,7 @@ namespace TravSystem.Controllers
                 return NotFound();
             }
 
-            var tPlanet = await _context.Planets
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var tPlanet = await _repo.GetByID(id.Value);
             if (tPlanet == null)
             {
                 return NotFound();
@@ -58,8 +53,7 @@ namespace TravSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(tPlanet);
-                await _context.SaveChangesAsync();
+                _repo.Add(tPlanet);
                 return RedirectToAction(nameof(Index));
             }
             return View(tPlanet);
@@ -73,7 +67,7 @@ namespace TravSystem.Controllers
                 return NotFound();
             }
 
-            var tPlanet = await _context.Planets.FindAsync(id);
+            var tPlanet = await _repo.GetByID(id.Value);
             if (tPlanet == null)
             {
                 return NotFound();
@@ -97,12 +91,11 @@ namespace TravSystem.Controllers
             {
                 try
                 {
-                    _context.Update(tPlanet);
-                    await _context.SaveChangesAsync();
+                    await _repo.Update(tPlanet);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TPlanetExists(tPlanet.Id))
+                    if (await TPlanetExists(tPlanet.Id) == false)
                     {
                         return NotFound();
                     }
@@ -124,8 +117,7 @@ namespace TravSystem.Controllers
                 return NotFound();
             }
 
-            var tPlanet = await _context.Planets
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var tPlanet = await _repo.GetByID(id.Value);
             if (tPlanet == null)
             {
                 return NotFound();
@@ -139,19 +131,15 @@ namespace TravSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tPlanet = await _context.Planets.FindAsync(id);
+            var tPlanet = await _repo.GetByID(id);
             if (tPlanet != null)
-            {
-                _context.Planets.Remove(tPlanet);
-            }
-
-            await _context.SaveChangesAsync();
+                await _repo.Delete(tPlanet);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TPlanetExists(int id)
+        private async Task<bool> TPlanetExists(int id)
         {
-            return _context.Planets.Any(e => e.Id == id);
+            return await _repo.GetByID(id) != null;   
         }
     }
 }
