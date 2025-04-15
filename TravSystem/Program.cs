@@ -14,6 +14,7 @@ builder.Configuration.SetBasePath(Directory.GetCurrentDirectory())
 builder.Services.AddDbContext<TravellerDBContext>();
 
 builder.Services.AddScoped<ITPlanetRepository, TPlanetRepository>();
+builder.Services.AddScoped<ITAtmopshereRepository, TAtmosphereRepository>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

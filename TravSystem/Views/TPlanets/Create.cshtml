@@ -39,7 +39,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="AtmosphereID" class="control-label"></label>
-                <input asp-for="AtmosphereID" class="form-control" />
+                <select asp-for="AtmosphereID" class="form-control" asp-items="@(new SelectList(ViewBag.Atmospheres, "Id", "Name"))"></select>
                 <span asp-validation-for="AtmosphereID" class="text-danger"></span>
             </div>
             <div class="form-group">

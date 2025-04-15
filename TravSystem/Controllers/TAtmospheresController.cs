@@ -1,4 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MyEfCoreApp.Data;
 using TravSystem.Data.Repositories;
@@ -6,24 +11,22 @@ using TravSystem.Models;
 
 namespace TravSystem.Controllers
 {
-    public class TPlanetsController : Controller
+    public class TAtmospheresController : Controller
     {
-        private readonly ITPlanetRepository _repo;
-        private readonly ITAtmopshereRepository _atmo;
+        private readonly ITAtmopshereRepository _repo;
 
-        public TPlanetsController(ITPlanetRepository repository, ITAtmopshereRepository atmopshereRepository)
+        public TAtmospheresController(ITAtmopshereRepository atmopshereRepository)
         {
-            _atmo = atmopshereRepository;
-            _repo = repository;
+            _repo = atmopshereRepository;
         }
 
-        // GET: TPlanets
+        // GET: TAtmospheres
         public async Task<IActionResult> Index()
         {
             return View(await _repo.GetAll());
         }
 
-        // GET: TPlanets/Details/5
+        // GET: TAtmospheres/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -31,40 +34,37 @@ namespace TravSystem.Controllers
                 return NotFound();
             }
 
-            var tPlanet = await _repo.GetByID(id.Value);
-            if (tPlanet == null)
+            var tAtmosphere = await _repo.GetByID(id.Value);
+            if (tAtmosphere == null)
             {
                 return NotFound();
             }
 
-            ViewBag.Atmospheres = await _atmo.GetAll();
-            return View(tPlanet);
+            return View(tAtmosphere);
         }
 
-        // GET: TPlanets/Create
-        public async Task<IActionResult> Create()
+        // GET: TAtmospheres/Create
+        public IActionResult Create()
         {
-            ViewBag.Atmospheres = await _atmo.GetAll();
             return View();
         }
 
-        // POST: TPlanets/Create
+        // POST: TAtmospheres/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,SubSectorId,PlanetId,Orbit,StarportID,Size,AtmosphereID,HydrographicsID,Population,GovernmentID,LawLevelID,TechLevelID")] TPlanet tPlanet)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description")] TAtmosphere tAtmosphere)
         {
             if (ModelState.IsValid)
             {
-                _repo.Add(tPlanet);
+                await _repo.Add(tAtmosphere);
                 return RedirectToAction(nameof(Index));
             }
-            ViewBag.Atmospheres = await _atmo.GetAll();
-            return View(tPlanet);
+            return View(tAtmosphere);
         }
 
-        // GET: TPlanets/Edit/5
+        // GET: TAtmospheres/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -72,23 +72,22 @@ namespace TravSystem.Controllers
                 return NotFound();
             }
 
-            var tPlanet = await _repo.GetByID(id.Value);
-            if (tPlanet == null)
+            var tAtmosphere = await _repo.GetByID(id.Value);
+            if (tAtmosphere == null)
             {
                 return NotFound();
             }
-            ViewBag.Atmospheres = await _atmo.GetAll();
-            return View(tPlanet);
+            return View(tAtmosphere);
         }
 
-        // POST: TPlanets/Edit/5
+        // POST: TAtmospheres/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,SubSectorId,PlanetId,Orbit,StarportID,Size,AtmosphereID,HydrographicsID,Population,GovernmentID,LawLevelID,TechLevelID")] TPlanet tPlanet)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description")] TAtmosphere tAtmosphere)
         {
-            if (id != tPlanet.Id)
+            if (id != tAtmosphere.Id)
             {
                 return NotFound();
             }
@@ -97,11 +96,11 @@ namespace TravSystem.Controllers
             {
                 try
                 {
-                    await _repo.Update(tPlanet);
+                    await _repo.Update(tAtmosphere);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (await TPlanetExists(tPlanet.Id) == false)
+                    if (TAtmosphereExists(tAtmosphere.Id) == false)
                     {
                         return NotFound();
                     }
@@ -112,11 +111,10 @@ namespace TravSystem.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewBag.Atmospheres = await _atmo.GetAll();
-            return View(tPlanet);
+            return View(tAtmosphere);
         }
 
-        // GET: TPlanets/Delete/5
+        // GET: TAtmospheres/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +122,32 @@ namespace TravSystem.Controllers
                 return NotFound();
             }
 
-            var tPlanet = await _repo.GetByID(id.Value);
-            if (tPlanet == null)
+            var tAtmosphere = await _repo.GetByID(id.Value);
+            if (tAtmosphere == null)
             {
                 return NotFound();
             }
 
-            ViewBag.Atmospheres = await _atmo.GetAll();
-            return View(tPlanet);
+            return View(tAtmosphere);
         }
 
-        // POST: TPlanets/Delete/5
+        // POST: TAtmospheres/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tPlanet = await _repo.GetByID(id);
-            if (tPlanet != null)
-                await _repo.Delete(tPlanet);
+            var tAtmosphere = await _repo.GetByID(id);
+            if (tAtmosphere != null)
+            {
+                await _repo.Delete(tAtmosphere);
+            }
+
             return RedirectToAction(nameof(Index));
         }
 
-        private async Task<bool> TPlanetExists(int id)
+        private bool TAtmosphereExists(int id)
         {
-            return await _repo.GetByID(id) != null;   
+            return _repo.GetByID(id) != null;
         }
     }
 }
