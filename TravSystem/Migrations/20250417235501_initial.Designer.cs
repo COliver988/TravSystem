@@ -10,7 +10,7 @@ using MyEfCoreApp.Data;
 namespace TravSystem.Migrations
 {
     [DbContext(typeof(TravellerDBContext))]
-    [Migration("20250413203929_initial")]
+    [Migration("20250417235501_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -27,6 +27,9 @@ namespace TravSystem.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<char>("HexCode")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
@@ -48,6 +51,11 @@ namespace TravSystem.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("HexCode")
+                        .IsRequired()
+                        .HasMaxLength(1)
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -65,6 +73,11 @@ namespace TravSystem.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("HexCode")
+                        .IsRequired()
+                        .HasMaxLength(1)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
@@ -128,6 +141,11 @@ namespace TravSystem.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("HexCode")
+                        .IsRequired()
+                        .HasMaxLength(1)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
