@@ -20,10 +20,19 @@ public class TPlanetRepository : ITPlanetRepository
         return planet;
     }
 
-    public async Task<TPlanet?> GetByID(int id) => await _context.Planets.Where(p => p.Id == id).FirstOrDefaultAsync();
+    public async Task<TPlanet?> GetByID(int id) =>
+    await _context.Planets
+        .Include(p => p.Atmosphere)
+        .Include(p => p.Starport)
+        .Where(p => p.Id == id)
+        .FirstOrDefaultAsync();
 
-    public Task<List<TPlanet>> GetBySubsectorID(int id) => _context.Planets.Where(p => p.SubSectorId == id).ToListAsync();
-    public Task<List<TPlanet>> GetAll() => _context.Planets.ToListAsync();
+
+    public Task<List<TPlanet>> GetBySubsectorID(int id) => _context.Planets.Where(p => p.TSubSectorId == id).ToListAsync();
+    public Task<List<TPlanet>> GetAll() => _context.Planets
+        .Include(p => p.Atmosphere)
+        .Include(p => p.Starport)
+        .ToListAsync();
 
     public async Task<TPlanet> Update(TPlanet planet)
     {

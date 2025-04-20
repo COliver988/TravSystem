@@ -17,5 +17,18 @@ namespace MyEfCoreApp.Data
         {
             optionsBuilder.UseSqlite("Data Source=Traveller.db");
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<TPlanet>()
+                .HasOne(p => p.Atmosphere) // Navigation property
+                .WithMany()                // Assuming TAtmosphere does not have a collection of TPlanets
+                .HasForeignKey(p => p.TAtmosphereId) // Foreign key
+                .OnDelete(DeleteBehavior.Restrict); // Optional: Configure delete behavior
+            modelBuilder.Entity<TPlanet>()
+                .HasOne(p => p.Starport) // Navigation property
+                .WithMany()                // Assuming TAtmosphere does not have a collection of TPlanets
+                .HasForeignKey(p => p.TStarportId) // Foreign key
+                .OnDelete(DeleteBehavior.Restrict); // Optional: Configure delete behavior
+        }
     }
 }

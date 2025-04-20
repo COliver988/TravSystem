@@ -14,14 +14,14 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="SubSectorId" class="control-label"></label>
-                <input asp-for="SubSectorId" class="form-control" />
-                <span asp-validation-for="SubSectorId" class="text-danger"></span>
+                <label asp-for="TSubSectorId" class="control-label"></label>
+                <input asp-for="TSubSectorId" class="form-control" />
+                <span asp-validation-for="TSubSectorId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PlanetId" class="control-label"></label>
-                <input asp-for="PlanetId" class="form-control" />
-                <span asp-validation-for="PlanetId" class="text-danger"></span>
+                <label asp-for="TPlanetId" class="control-label"></label>
+                <input asp-for="TPlanetId" class="form-control" />
+                <span asp-validation-for="TPlanetId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Orbit" class="control-label"></label>
@@ -29,9 +29,9 @@
                 <span asp-validation-for="Orbit" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="StarportID" class="control-label"></label>
-                <input asp-for="StarportID" class="form-control" />
-                <span asp-validation-for="StarportID" class="text-danger"></span>
+                <label asp-for="TStarportId" class="control-label"></label>
+                <input asp-for="TStarportId" class="form-control" />
+                <span asp-validation-for="TStarportId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Size" class="control-label"></label>
@@ -39,14 +39,14 @@
                 <span asp-validation-for="Size" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="AtmosphereID" class="control-label"></label>
-                <select asp-for="AtmosphereID" class="form-control" asp-items="@(new SelectList(((IEnumerable<dynamic>)ViewBag.Atmospheres).Select(a => new { Id = a.Id, Name = $"{a.HexCode} {a.Name}" }), "Id", "Name"))"></select>
-                <span asp-validation-for="AtmosphereID" class="text-danger"></span>
+                <label asp-for="TAtmosphereId" class="control-label"></label>
+                <select asp-for="TAtmosphereId" class="form-control" asp-items="@(new SelectList(((IEnumerable<dynamic>)ViewBag.Atmospheres).Select(a => new { Id = a.Id, Name = $"{a.HexCode} {a.Name}" }), "Id", "Name"))"></select>
+                <span asp-validation-for="TAtmosphereId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="HydrographicsID" class="control-label"></label>
-                <input asp-for="HydrographicsID" class="form-control" />
-                <span asp-validation-for="HydrographicsID" class="text-danger"></span>
+                <label asp-for="Hydrographics" class="control-label"></label>
+                <input asp-for="Hydrographics" class="form-control" />
+                <span asp-validation-for="Hydrographics" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Population" class="control-label"></label>
@@ -54,19 +54,19 @@
                 <span asp-validation-for="Population" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="GovernmentID" class="control-label"></label>
-                <input asp-for="GovernmentID" class="form-control" />
-                <span asp-validation-for="GovernmentID" class="text-danger"></span>
+                <label asp-for="TGovernmentId" class="control-label"></label>
+                <input asp-for="TGovernmentId" class="form-control" />
+                <span asp-validation-for="TGovernmentId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="LawLevelID" class="control-label"></label>
-                <input asp-for="LawLevelID" class="form-control" />
-                <span asp-validation-for="LawLevelID" class="text-danger"></span>
+                <label asp-for="TLawLevelId" class="control-label"></label>
+                <input asp-for="TLawLevelId" class="form-control" />
+                <span asp-validation-for="TLawLevelId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TechLevelID" class="control-label"></label>
-                <input asp-for="TechLevelID" class="form-control" />
-                <span asp-validation-for="TechLevelID" class="text-danger"></span>
+                <label asp-for="TechLevel" class="control-label"></label>
+                <input asp-for="TechLevel" class="form-control" />
+                <span asp-validation-for="TechLevel" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

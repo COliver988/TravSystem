@@ -10,4 +10,5 @@ public class TAtmosphere
 
     [StringLength(1, ErrorMessage = "The field must be a single character.")]
     public string HexCode { get; set; }
+
 }

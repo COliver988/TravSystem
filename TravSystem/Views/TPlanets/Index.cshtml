@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<TravSystem.Models.TPlanet>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Planet List";
 }
 
-<h1>Index</h1>
+<h1>Planet List</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -13,37 +13,37 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.SubSectorId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PlanetId)
+                Subsector
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Orbit)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.StarportID)
+                Starport
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Size)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AtmosphereID)
+                Atmosphere
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.HydrographicsID)
+                Hyrographics
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Population)
+                Population
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.GovernmentID)
+                Government
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LawLevelID)
+                Law Level
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TechLevelID)
+                Tech Level
+            </th>
+            <th>
+                UWP
             </th>
             <th></th>
         </tr>
@@ -52,37 +52,37 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.SubSectorId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PlanetId)
+                @Html.DisplayFor(modelItem => item.TSubSectorId)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Orbit)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.StarportID)
+                @Html.DisplayFor(modelItem => item.Starport.HexCode)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Size)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AtmosphereID)
+                @Html.DisplayFor(modelItem => item.Atmosphere.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.HydrographicsID)
+                @Html.DisplayFor(modelItem => item.Hydrographics)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Population)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.GovernmentID)
+                @Html.DisplayFor(modelItem => item.TGovernmentId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LawLevelID)
+                @Html.DisplayFor(modelItem => item.TLawLevelId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TechLevelID)
+                @Html.DisplayFor(modelItem => item.TechLevel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UWP)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

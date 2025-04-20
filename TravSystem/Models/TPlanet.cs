@@ -3,15 +3,22 @@
 public class TPlanet
 {
     public int Id { get; set; }
-    public int? SubSectorId { get; set; }
-    public int? PlanetId { get; set; }
+    public int? TSubSectorId { get; set; }
+    public int? TPlanetId { get; set; }
     public int Orbit { get; set; }
-    public int StarportID { get; set; }
+    public int TStarportId { get; set; }
     public int Size { get; set; }
-    public int AtmosphereID { get; set; }
-    public int HydrographicsID { get; set; }
+    public int TAtmosphereId { get; set; }
+    public int Hydrographics { get; set; }
     public int Population { get; set; }
-    public int GovernmentID { get; set; }
-    public int LawLevelID { get; set; }
-    public int TechLevelID { get; set; }
+    public int TGovernmentId { get; set; }
+    public int TLawLevelId { get; set; }
+    public int TechLevel { get; set; }
+
+    public string UWP => $"{this.Starport.HexCode}{this.Size}{this.Atmosphere.HexCode}{this.Hydrographics}{this.Population}<gov><LL>-{this.TechLevel}";
+    //public string UWP => $"{this.Starport.HexCode}{this.Size}{this.Atmosphere.HexCode}{this.Hydrographics}{this.Population}{this.Government.HexCode}{this.LawLevel.HexCode}-{this.TechLevel}";
+    public TStarport? Starport { get; set; }
+    public TAtmosphere? Atmosphere { get; set; }
+    public TGovernment? Government { get; set; }
+    public TLawLevel? LawLevel { get; set; }
 }
