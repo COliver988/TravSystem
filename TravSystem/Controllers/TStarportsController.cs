@@ -1,28 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using MyEfCoreApp.Data;
+using TravSystem.Data.Repositories;
 using TravSystem.Models;
 
 namespace TravSystem.Controllers
 {
     public class TStarportsController : Controller
     {
-        private readonly TravellerDBContext _context;
+        private readonly ITStarportRepository _repo;
 
-        public TStarportsController(TravellerDBContext context)
+        public TStarportsController(ITStarportRepository context)
         {
-            _context = context;
+            _repo = context;
         }
 
         // GET: TStarports
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Starports.ToListAsync());
+            return View(await _repo.GetAll());
         }
 
         // GET: TStarports/Details/5
@@ -33,8 +28,7 @@ namespace TravSystem.Controllers
                 return NotFound();
             }
 
-            var tStarport = await _context.Starports
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var tStarport = await _repo.GetByID(id.Value);
             if (tStarport == null)
             {
                 return NotFound();
@@ -58,8 +52,7 @@ namespace TravSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(tStarport);
-                await _context.SaveChangesAsync();
+                await _repo.Add(tStarport);
                 return RedirectToAction(nameof(Index));
             }
             return View(tStarport);
@@ -73,7 +66,7 @@ namespace TravSystem.Controllers
                 return NotFound();
             }
 
-            var tStarport = await _context.Starports.FindAsync(id);
+            var tStarport = await _repo.GetByID(id.Value);
             if (tStarport == null)
             {
                 return NotFound();
@@ -97,8 +90,7 @@ namespace TravSystem.Controllers
             {
                 try
                 {
-                    _context.Update(tStarport);
-                    await _context.SaveChangesAsync();
+                    _repo.Update(tStarport);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -124,8 +116,7 @@ namespace TravSystem.Controllers
                 return NotFound();
             }
 
-            var tStarport = await _context.Starports
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var tStarport = await _repo.GetByID(id.Value);
             if (tStarport == null)
             {
                 return NotFound();
@@ -139,19 +130,18 @@ namespace TravSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tStarport = await _context.Starports.FindAsync(id);
+            var tStarport = await _repo.GetByID(id);
             if (tStarport != null)
             {
-                _context.Starports.Remove(tStarport);
+                await _repo.Delete(tStarport);
             }
 
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool TStarportExists(int id)
         {
-            return _context.Starports.Any(e => e.Id == id);
+            return _repo.GetByID(id) != null;
         }
     }
 }
