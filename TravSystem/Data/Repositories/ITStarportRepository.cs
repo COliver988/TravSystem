@@ -8,5 +8,5 @@ public interface ITStarportRepository
     Task<TStarport> GetByID(int id);
     Task<TStarport> Add(TStarport starport);
     Task<TStarport> Update(TStarport starport);
-    Task<TStarport> Delete(TStarport starport);
+    Task Delete(TStarport starport);
 }

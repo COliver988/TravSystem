@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TravSystem.Data.Repositories;
 using TravSystem.Models;
@@ -9,11 +10,13 @@ public class TPlanetsController : Controller
 {
     private readonly ITPlanetRepository _repo;
     private readonly ITAtmopshereRepository _atmo;
+    private readonly ITGovernmentRepository _government;
 
-    public TPlanetsController(ITPlanetRepository repository, ITAtmopshereRepository atmopshereRepository)
+    public TPlanetsController(ITPlanetRepository repository, ITAtmopshereRepository atmopshereRepository, ITGovernmentRepository governmentRepository)
     {
         _atmo = atmopshereRepository;
         _repo = repository;
+        _government = governmentRepository;
     }
 
     // GET: TPlanets
@@ -37,6 +40,7 @@ public class TPlanetsController : Controller
         }
 
         ViewBag.Atmospheres = await _atmo.GetAll();
+        ViewBag.Governments = await _government.GetAll();
         return View(tPlanet);
     }
 
@@ -44,6 +48,7 @@ public class TPlanetsController : Controller
     public async Task<IActionResult> Create()
     {
         ViewBag.Atmospheres = await _atmo.GetAll();
+        ViewBag.Governments = await _government.GetAll();
         return View();
     }
 
@@ -60,6 +65,7 @@ public class TPlanetsController : Controller
             return RedirectToAction(nameof(Index));
         }
         ViewBag.Atmospheres = await _atmo.GetAll();
+        ViewBag.Governments = await _government.GetAll();
         return View(tPlanet);
     }
 
@@ -76,16 +82,22 @@ public class TPlanetsController : Controller
         {
             return NotFound();
         }
-        ViewBag.Atmospheres = await _atmo.GetAll();
-        return View(tPlanet);
-    }
+        ViewBag.Atmospheres = new SelectList(
+            (await _atmo.GetAll()).Select(a => new { Id = a.Id, Name = $"{a.HexCode} {a.Name}" }),
+            "Id",
+            "Name"
+        );
 
+        ViewBag.Governments = await _government.GetAll();
+        return View(tPlanet);
+
+    }
     // POST: TPlanets/Edit/5
     // To protect from overposting attacks, enable the specific properties you want to bind to.
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int id, [Bind("Id,SubSectorId,PlanetId,Orbit,StarportID,Size,AtmosphereID,HydrographicsID,Population,GovernmentID,LawLevelID,TechLevelID")] TPlanet tPlanet)
+    public async Task<IActionResult> Edit(int id, [Bind("Id,TSubSectorId,TPlanetId,Orbit,TStarportId,Size,TAtmosphereId,THydrographicsId,Population,TGovernmentId,TLawLevelID,TechLevel")] TPlanet tPlanet)
     {
         if (id != tPlanet.Id)
         {
@@ -111,6 +123,7 @@ public class TPlanetsController : Controller
             }
             return RedirectToAction(nameof(Index));
         }
+        ViewBag.Governments = await _government.GetAll();
         ViewBag.Atmospheres = await _atmo.GetAll();
         return View(tPlanet);
     }

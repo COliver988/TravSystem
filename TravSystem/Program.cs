@@ -14,6 +14,8 @@ builder.Services.AddDbContext<TravellerDBContext>();
 
 builder.Services.AddScoped<ITPlanetRepository, TPlanetRepository>();
 builder.Services.AddScoped<ITAtmopshereRepository, TAtmosphereRepository>();
+builder.Services.AddScoped<ITGovernmentRepository, TGovernmentRepository>();
+builder.Services.AddScoped<ITStarportRepository, TStarportRepository>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

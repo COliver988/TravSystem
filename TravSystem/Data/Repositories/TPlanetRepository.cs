@@ -24,6 +24,7 @@ public class TPlanetRepository : ITPlanetRepository
     await _context.Planets
         .Include(p => p.Atmosphere)
         .Include(p => p.Starport)
+        .Include(p => p.Government)
         .Where(p => p.Id == id)
         .FirstOrDefaultAsync();
 
@@ -32,6 +33,7 @@ public class TPlanetRepository : ITPlanetRepository
     public Task<List<TPlanet>> GetAll() => _context.Planets
         .Include(p => p.Atmosphere)
         .Include(p => p.Starport)
+        .Include(p => p.Government)
         .ToListAsync();
 
     public async Task<TPlanet> Update(TPlanet planet)

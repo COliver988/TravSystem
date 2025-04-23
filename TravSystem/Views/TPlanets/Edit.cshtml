@@ -39,8 +39,8 @@
                 <span asp-validation-for="Size" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TAtmosphereId" class="control-label"></label>
-                <select asp-for="TAtmosphereId" class="form-control" asp-items="@(new SelectList(((IEnumerable<dynamic>)ViewBag.Atmospheres).Select(a => new { Id = a.Id, Name = $"{a.HexCode} {a.Name}" }), "Id", "Name"))"></select>
+                <label asp-for="TAtmosphereId" class="control-label">Atmosphere</label>
+                <select asp-for="TAtmosphereId" class="form-control" asp-items="ViewBag.Atmospheres"></select>
                 <span asp-validation-for="TAtmosphereId" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -55,7 +55,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="TGovernmentId" class="control-label"></label>
-                <input asp-for="TGovernmentId" class="form-control" />
+                <select asp-for="TGovernmentId" class="form-control" asp-items="@(new SelectList(((IEnumerable<dynamic>)ViewBag.Governments).Select(a => new { Id = a.Id, Name = $"{a.HexCode} {a.Name}" }), "Id", "Name"))"></select>
                 <span asp-validation-for="TGovernmentId" class="text-danger"></span>
             </div>
             <div class="form-group">
