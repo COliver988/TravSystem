@@ -15,8 +15,7 @@ public class TPlanet
     public int TLawLevelId { get; set; }
     public int TechLevel { get; set; }
 
-    public string UWP => $"{this.Starport?.HexCode}{this.Size}{this.Atmosphere?.HexCode}{this.Hydrographics}{this.Population}{this.Government?.HexCode}<LL>-{this.TechLevel}";
-    //public string UWP => $"{this.Starport.HexCode}{this.Size}{this.Atmosphere.HexCode}{this.Hydrographics}{this.Population}{this.Government.HexCode}{this.LawLevel.HexCode}-{this.TechLevel}";
+    public string UWP => $"{this.Starport?.HexCode}{this.Size}{this.Atmosphere?.HexCode}{this.Hydrographics}{this.Population}{this.Government?.HexCode}{this.LawLevel?.HexCode}-{this.TechLevel}";
     public TStarport? Starport { get; set; }
     public TAtmosphere? Atmosphere { get; set; }
     public TGovernment? Government { get; set; }

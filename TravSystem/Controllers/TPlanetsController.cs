@@ -11,12 +11,17 @@ public class TPlanetsController : Controller
     private readonly ITPlanetRepository _repo;
     private readonly ITAtmopshereRepository _atmo;
     private readonly ITGovernmentRepository _government;
+    private readonly ITLawLevelRepository _lawlevel;
 
-    public TPlanetsController(ITPlanetRepository repository, ITAtmopshereRepository atmopshereRepository, ITGovernmentRepository governmentRepository)
+    public TPlanetsController(ITPlanetRepository repository,
+        ITAtmopshereRepository atmopshereRepository,
+        ITGovernmentRepository governmentRepository,
+        ITLawLevelRepository lawLevelRepository)
     {
         _atmo = atmopshereRepository;
         _repo = repository;
         _government = governmentRepository;
+        _lawlevel = lawLevelRepository;
     }
 
     // GET: TPlanets
@@ -41,6 +46,7 @@ public class TPlanetsController : Controller
 
         ViewBag.Atmospheres = await _atmo.GetAll();
         ViewBag.Governments = await _government.GetAll();
+        ViewBag.LawLevels = await _lawlevel.GetAll();   
         return View(tPlanet);
     }
 
@@ -49,6 +55,7 @@ public class TPlanetsController : Controller
     {
         ViewBag.Atmospheres = await _atmo.GetAll();
         ViewBag.Governments = await _government.GetAll();
+        ViewBag.LawLevels = await _lawlevel.GetAll();   
         return View();
     }
 
@@ -66,6 +73,7 @@ public class TPlanetsController : Controller
         }
         ViewBag.Atmospheres = await _atmo.GetAll();
         ViewBag.Governments = await _government.GetAll();
+        ViewBag.LawLevels = await _lawlevel.GetAll();   
         return View(tPlanet);
     }
 
@@ -89,6 +97,7 @@ public class TPlanetsController : Controller
         );
 
         ViewBag.Governments = await _government.GetAll();
+        ViewBag.LawLevels = await _lawlevel.GetAll();   
         return View(tPlanet);
 
     }
