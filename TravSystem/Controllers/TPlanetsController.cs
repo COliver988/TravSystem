@@ -64,7 +64,7 @@ public class TPlanetsController : Controller
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("Id,SubSectorId,PlanetId,Orbit,StarportID,Size,AtmosphereID,HydrographicsID,Population,GovernmentID,LawLevelID,TechLevelID")] TPlanet tPlanet)
+    public async Task<IActionResult> Create([Bind("Id,TSubSectorId,TPlanetId,Orbit,TStarportID,Size,TAtmosphereID,THydrographicsID,Population,TGovernmentID,TLawLevelID,TechLevel")] TPlanet tPlanet)
     {
         if (ModelState.IsValid)
         {
@@ -106,7 +106,7 @@ public class TPlanetsController : Controller
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int id, [Bind("Id,TSubSectorId,TPlanetId,Orbit,TStarportId,Size,TAtmosphereId,THydrographicsId,Population,TGovernmentId,TLawLevelID,TechLevel")] TPlanet tPlanet)
+    public async Task<IActionResult> Edit(int id, [Bind("Id,TSubSectorId,TPlanetId,Orbit,TStarportId,Size,TAtmosphereId,THydrographicsId,Population,TGovernmentId,TLawLevelId,TechLevel")] TPlanet tPlanet)
     {
         if (id != tPlanet.Id)
         {

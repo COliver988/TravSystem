@@ -25,7 +25,7 @@ public class TPlanetRepository : ITPlanetRepository
         .Include(p => p.Atmosphere)
         .Include(p => p.Starport)
         .Include(p => p.Government)
-        .Include(l => l.LawLevel)
+        .Include(p => p.LawLevel)
         .Where(p => p.Id == id)
         .FirstOrDefaultAsync();
 
@@ -35,7 +35,7 @@ public class TPlanetRepository : ITPlanetRepository
         .Include(p => p.Atmosphere)
         .Include(p => p.Starport)
         .Include(p => p.Government)
-        .Include(l => l.LawLevel)
+        .Include(p => p.LawLevel)
         .ToListAsync();
 
     public async Task<TPlanet> Update(TPlanet planet)

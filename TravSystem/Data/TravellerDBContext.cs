@@ -20,6 +20,11 @@ namespace MyEfCoreApp.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<TPlanet>()
+                .HasOne(p => p.LawLevel)
+                .WithMany()
+                .HasForeignKey(p => p.TLawLevelId)
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<TPlanet>()
                 .HasOne(p => p.Atmosphere) // Navigation property
                 .WithMany()                // Assuming TAtmosphere does not have a collection of TPlanets
                 .HasForeignKey(p => p.TAtmosphereId) // Foreign key
@@ -34,11 +39,6 @@ namespace MyEfCoreApp.Data
                 .WithMany()                // Assuming TAtmosphere does not have a collection of TPlanets
                 .HasForeignKey(p => p.TGovernmentId) // Foreign key
                 .OnDelete(DeleteBehavior.Restrict); // Optional: Configure delete behavior
-            modelBuilder.Entity<TPlanet>()
-                .HasOne(p => p.LawLevel)
-                .WithMany()
-                .HasForeignKey(p => p.TLawLevelId)
-                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
