@@ -1,0 +1,45 @@
+﻿using Microsoft.EntityFrameworkCore;
+using MyEfCoreApp.Data;
+using TravSystem.Models;
+
+namespace TravSystem.Data.Repositories;
+
+public class TSystemRepository : ITSystemRepository
+{
+    private readonly TravellerDBContext _context;
+
+    public TSystemRepository(TravellerDBContext context)
+    {
+        _context = context;
+    }
+
+    public async Task<TSystem> Add(TSystem tsystem)
+    {
+        _context.Systems.Add(tsystem);
+        await _context.SaveChangesAsync();
+        return tsystem;
+    }
+
+    public async Task Delete(TSystem tsystem)
+    {
+        _context.Systems.Remove(tsystem);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task<List<TSystem>> GetAll() => 
+        await _context.Systems
+        .Include(s => s.SubSector)
+        .ToListAsync();
+
+    public async Task<TSystem?> GetByID(int id) =>
+        await _context.Systems
+          .Include(s => s.SubSector)
+          .Where(s => s.Id == id).FirstOrDefaultAsync();
+
+    public async Task<TSystem> Update(TSystem tsystem)
+    {
+        _context.Systems.Update(tsystem);
+        await _context.SaveChangesAsync();
+        return tsystem;
+    }
+}

@@ -17,6 +17,8 @@ builder.Services.AddScoped<ITAtmopshereRepository, TAtmosphereRepository>();
 builder.Services.AddScoped<ITGovernmentRepository, TGovernmentRepository>();
 builder.Services.AddScoped<ITLawLevelRepository, TLawLevelRepository>();
 builder.Services.AddScoped<ITStarportRepository, TStarportRepository>();
+builder.Services.AddScoped<ITSubSectorRepository, TSubSectorRepository>();
+builder.Services.AddScoped<ITSystemRepository, TSystemRepository>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

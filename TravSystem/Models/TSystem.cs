@@ -7,4 +7,5 @@ public class TSystem
     public string Name { get; set; }
 
     IEnumerable<TPlanet> Planets { get; set; }
+    public TSubSector? SubSector { get; set; }
 }
