@@ -4,6 +4,7 @@ namespace TravSystem.Models;
 public class TPlanet
 {
     public int Id { get; set; }
+    public string? Name { get; set; }
     public int? TSubSectorId { get; set; }
     public int? TPlanetId { get; set; }
     public int Orbit { get; set; }

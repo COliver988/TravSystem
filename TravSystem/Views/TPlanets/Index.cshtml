@@ -16,7 +16,10 @@
                 Subsector
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Orbit)
+                Name
+            </th>
+            <th>
+                Orbit
             </th>
             <th>
                 Starport
@@ -53,6 +56,9 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.TSubSectorId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Orbit)

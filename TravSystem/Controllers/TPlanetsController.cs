@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ActionConstraints;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TravSystem.Data.Repositories;
@@ -64,7 +65,7 @@ public class TPlanetsController : Controller
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("Id,TSubSectorId,TPlanetId,Orbit,TStarportID,Size,TAtmosphereID,THydrographicsID,Population,TGovernmentID,TLawLevelID,TechLevel")] TPlanet tPlanet)
+    public async Task<IActionResult> Create([Bind("Id,TSubSectorId,TPlanetId,Name,Orbit,TStarportID,Size,TAtmosphereID,THydrographicsID,Population,TGovernmentID,TLawLevelID,TechLevel")] TPlanet tPlanet)
     {
         if (ModelState.IsValid)
         {
@@ -101,12 +102,30 @@ public class TPlanetsController : Controller
         return View(tPlanet);
 
     }
+
+    public async Task<IActionResult> EditPlanet(TPlanet tPlanet)
+    {
+        if (tPlanet == null)
+        {
+            return NotFound();
+        }
+        ViewBag.Atmospheres = new SelectList(
+            (await _atmo.GetAll()).Select(a => new { Id = a.Id, Name = $"{a.HexCode} {a.Name}" }),
+            "Id",
+            "Name"
+        );
+
+        ViewBag.Governments = await _government.GetAll();
+        ViewBag.LawLevels = await _lawlevel.GetAll();   
+        return View("Edit", tPlanet);
+    }
+
     // POST: TPlanets/Edit/5
     // To protect from overposting attacks, enable the specific properties you want to bind to.
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int id, [Bind("Id,TSubSectorId,TPlanetId,Orbit,TStarportId,Size,TAtmosphereId,THydrographicsId,Population,TGovernmentId,TLawLevelId,TechLevel")] TPlanet tPlanet)
+    public async Task<IActionResult> Edit(int id, [Bind("Id,TSubSectorId,Name,TPlanetId,Orbit,TStarportId,Size,TAtmosphereId,THydrographicsId,Population,TGovernmentId,TLawLevelId,TechLevel")] TPlanet tPlanet)
     {
         if (id != tPlanet.Id)
         {
@@ -137,6 +156,13 @@ public class TPlanetsController : Controller
         return View(tPlanet);
     }
 
+    public async Task<IActionResult> Generate()
+    {
+        TPlanet planet = new TPlanet() { Name = "New planet" };
+        ViewBag.Atmospheres = await _atmo.GetAll();
+        return RedirectToAction("EditPlanet", planet);
+    }
+
     // GET: TPlanets/Delete/5
     public async Task<IActionResult> Delete(int? id)
     {
@@ -151,7 +177,6 @@ public class TPlanetsController : Controller
             return NotFound();
         }
 
-        ViewBag.Atmospheres = await _atmo.GetAll();
         return View(tPlanet);
     }
 

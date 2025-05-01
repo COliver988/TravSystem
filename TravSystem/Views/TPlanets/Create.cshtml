@@ -18,6 +18,11 @@
                 <span asp-validation-for="TSubSectorId" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="TPlanetId" class="control-label"></label>
                 <input asp-for="TPlanetId" class="form-control" />
                 <span asp-validation-for="TPlanetId" class="text-danger"></span>
@@ -73,6 +78,10 @@
             </div>
         </form>
     </div>
+</div>
+
+<div>
+    <a asp-action="Generate">Create a planet</a>
 </div>
 
 <div>
