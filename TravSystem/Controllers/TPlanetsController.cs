@@ -13,16 +13,22 @@ public class TPlanetsController : Controller
     private readonly ITAtmopshereRepository _atmo;
     private readonly ITGovernmentRepository _government;
     private readonly ITLawLevelRepository _lawlevel;
+    private readonly ITStarportRepository _starports;
+    private readonly ITSubSectorRepository _subSectorRepository;
 
     public TPlanetsController(ITPlanetRepository repository,
         ITAtmopshereRepository atmopshereRepository,
         ITGovernmentRepository governmentRepository,
-        ITLawLevelRepository lawLevelRepository)
+        ITLawLevelRepository lawLevelRepository,
+        ITStarportRepository starportRepository,
+        ITSubSectorRepository subSectorRepository)
     {
         _atmo = atmopshereRepository;
         _repo = repository;
         _government = governmentRepository;
         _lawlevel = lawLevelRepository;
+        _starports = starportRepository;
+        _subSectorRepository = subSectorRepository;
     }
 
     // GET: TPlanets
@@ -45,9 +51,6 @@ public class TPlanetsController : Controller
             return NotFound();
         }
 
-        ViewBag.Atmospheres = await _atmo.GetAll();
-        ViewBag.Governments = await _government.GetAll();
-        ViewBag.LawLevels = await _lawlevel.GetAll();   
         return View(tPlanet);
     }
 
@@ -57,6 +60,8 @@ public class TPlanetsController : Controller
         ViewBag.Atmospheres = await _atmo.GetAll();
         ViewBag.Governments = await _government.GetAll();
         ViewBag.LawLevels = await _lawlevel.GetAll();   
+        ViewBag.Starports = await _starports.GetAll();
+        ViewBag.SubSectors = await _subSectorRepository.GetAll();
         return View();
     }
 
@@ -75,6 +80,8 @@ public class TPlanetsController : Controller
         ViewBag.Atmospheres = await _atmo.GetAll();
         ViewBag.Governments = await _government.GetAll();
         ViewBag.LawLevels = await _lawlevel.GetAll();   
+        ViewBag.Starports = await _starports.GetAll();
+        ViewBag.SubSectors = await _subSectorRepository.GetAll();
         return View(tPlanet);
     }
 
@@ -91,14 +98,12 @@ public class TPlanetsController : Controller
         {
             return NotFound();
         }
-        ViewBag.Atmospheres = new SelectList(
-            (await _atmo.GetAll()).Select(a => new { Id = a.Id, Name = $"{a.HexCode} {a.Name}" }),
-            "Id",
-            "Name"
-        );
 
+        ViewBag.Atmospheres = await _atmo.GetAll();
         ViewBag.Governments = await _government.GetAll();
         ViewBag.LawLevels = await _lawlevel.GetAll();   
+        ViewBag.Starports = await _starports.GetAll();
+        ViewBag.SubSectors = await _subSectorRepository.GetAll();
         return View(tPlanet);
 
     }
@@ -115,8 +120,11 @@ public class TPlanetsController : Controller
             "Name"
         );
 
+        ViewBag.Atmospheres = await _atmo.GetAll();
         ViewBag.Governments = await _government.GetAll();
         ViewBag.LawLevels = await _lawlevel.GetAll();   
+        ViewBag.Starports = await _starports.GetAll();
+        ViewBag.SubSectors = await _subSectorRepository.GetAll();
         return View("Edit", tPlanet);
     }
 
@@ -151,15 +159,17 @@ public class TPlanetsController : Controller
             }
             return RedirectToAction(nameof(Index));
         }
+        ViewBag.Atmospheres = await _atmo.GetAll();
         ViewBag.Governments = await _government.GetAll();
         ViewBag.Atmospheres = await _atmo.GetAll();
+        ViewBag.Starports = await _starports.GetAll();
+        ViewBag.SubSectors = await _subSectorRepository.GetAll();
         return View(tPlanet);
     }
 
     public async Task<IActionResult> Generate()
     {
         TPlanet planet = new TPlanet() { Name = "New planet" };
-        ViewBag.Atmospheres = await _atmo.GetAll();
         return RedirectToAction("EditPlanet", planet);
     }
 

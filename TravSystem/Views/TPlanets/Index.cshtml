@@ -55,7 +55,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.TSubSectorId)
+                @Html.DisplayFor(modelItem => item.SubSector.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)

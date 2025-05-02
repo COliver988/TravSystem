@@ -3,6 +3,7 @@ namespace TravSystem.Models;
 
 public class TPlanet
 {
+    private static string hexcodes = "0123456789ABCDEFGHJKLMNPQRSTUVWXYZ";
     public int Id { get; set; }
     public string? Name { get; set; }
     public int? TSubSectorId { get; set; }
@@ -19,9 +20,11 @@ public class TPlanet
 
     public int TechLevel { get; set; }
 
-    public string UWP => $"{this.Starport?.HexCode}{this.Size}{this.Atmosphere?.HexCode}{this.Hydrographics}{this.Population}{this.Government?.HexCode}{this.LawLevel?.HexCode}-{this.TechLevel}";
+    public string UWP => $"{this.Starport?.HexCode}{this.Size}{this.Atmosphere?.HexCode}{this.Hydrographics}{this.Population}{this.Government?.HexCode}{this.LawLevel?.HexCode}-{hexcodes.Substring(TechLevel, 1)[0]}";
     public TStarport? Starport { get; set; }
     public TAtmosphere? Atmosphere { get; set; }
     public TGovernment? Government { get; set; }
     public TLawLevel? LawLevel { get; set; }
+
+    public TSubSector? SubSector { get; set; }
 }
