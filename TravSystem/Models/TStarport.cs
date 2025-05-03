@@ -10,4 +10,7 @@ public class TStarport
 
     [StringLength(1, ErrorMessage = "The field must be a single character.")]
     public string HexCode { get; set; }
+
+    public int DieRollMin { get; set; }
+    public int DieRollMax { get; set; }
 }

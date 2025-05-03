@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using MyEfCoreApp.Data;
 using TravSystem.Data.Repositories;
+using TravSystem.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +21,9 @@ builder.Services.AddScoped<ITStarportRepository, TStarportRepository>();
 builder.Services.AddScoped<ITSubSectorRepository, TSubSectorRepository>();
 builder.Services.AddScoped<ITSystemRepository, TSystemRepository>();
 
-// Add services to the container.
+builder.Services.AddScoped<IUtilitlityService, UtilityService>();
+builder.Services.AddScoped<ITPlanetGenService, TPlanetGenService>();    
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

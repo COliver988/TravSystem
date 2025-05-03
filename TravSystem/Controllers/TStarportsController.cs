@@ -48,7 +48,7 @@ namespace TravSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,HexCode")] TStarport tStarport)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,HexCode, DieRollMin, DieRollMax")] TStarport tStarport)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace TravSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,HexCode")] TStarport tStarport)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,HexCode, DieRollMin, DieRollMax")] TStarport tStarport)
         {
             if (id != tStarport.Id)
             {

@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ActionConstraints;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TravSystem.Data.Repositories;
 using TravSystem.Models;
+using TravSystem.Services;
 
 namespace TravSystem.Controllers;
 
@@ -15,13 +15,15 @@ public class TPlanetsController : Controller
     private readonly ITLawLevelRepository _lawlevel;
     private readonly ITStarportRepository _starports;
     private readonly ITSubSectorRepository _subSectorRepository;
+    private readonly ITPlanetGenService _planetGenService;
 
     public TPlanetsController(ITPlanetRepository repository,
         ITAtmopshereRepository atmopshereRepository,
         ITGovernmentRepository governmentRepository,
         ITLawLevelRepository lawLevelRepository,
         ITStarportRepository starportRepository,
-        ITSubSectorRepository subSectorRepository)
+        ITSubSectorRepository subSectorRepository,
+        ITPlanetGenService tPlanetGenService)
     {
         _atmo = atmopshereRepository;
         _repo = repository;
@@ -29,6 +31,7 @@ public class TPlanetsController : Controller
         _lawlevel = lawLevelRepository;
         _starports = starportRepository;
         _subSectorRepository = subSectorRepository;
+        _planetGenService = tPlanetGenService;
     }
 
     // GET: TPlanets
@@ -169,7 +172,7 @@ public class TPlanetsController : Controller
 
     public async Task<IActionResult> Generate()
     {
-        TPlanet planet = new TPlanet() { Name = "New planet" };
+        TPlanet planet = await _planetGenService.GeneratePlanet();
         return RedirectToAction("EditPlanet", planet);
     }
 
