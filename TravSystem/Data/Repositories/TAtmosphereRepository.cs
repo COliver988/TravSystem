@@ -30,6 +30,7 @@ public class TAtmosphereRepository : ITAtmopshereRepository
     public async Task<List<TAtmosphere>> GetAll() => await _context.Atmospheres.ToListAsync();
 
     public Task<TAtmosphere?> GetByID(int id) => _context.Atmospheres.Where(p => p.Id == id).FirstOrDefaultAsync();
+    public Task<TAtmosphere?> GetByHexCode(string hexcode) => _context.Atmospheres.Where(p => p.HexCode == hexcode).FirstOrDefaultAsync();
 
     public async Task<TAtmosphere> Update(TAtmosphere atmosphere)
     {

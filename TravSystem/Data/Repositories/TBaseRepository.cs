@@ -29,6 +29,7 @@ public class TBaseRepository : ITBaseRepository
     public async Task<List<TBase>> GetAll() => await _context.Bases.ToListAsync();
 
     public Task<TBase?> GetByID(int id) => _context.Bases.Where(s => s.Id == id).FirstOrDefaultAsync();
+    public Task<TBase?> GetByCode(string code) => _context.Bases.Where(s => s.HexCode == code).FirstOrDefaultAsync();
 
     public Task<TBase> Update(TBase tbase)
     {

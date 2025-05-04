@@ -3,6 +3,7 @@
 public class UtilityService : IUtilitlityService
 {
     private Random _random;
+    private static string hexcodes = "0123456789ABCDEFGHJKLMNPQRSTUVWXYZ";
 
     public UtilityService()
     {
@@ -17,5 +18,10 @@ public class UtilityService : IUtilitlityService
             results += _random.Next(1, side + 1);
         }
         return results;
+    }
+
+    public string IntToHex(int index)
+    {
+        return hexcodes.Substring(index, 1);
     }
 }

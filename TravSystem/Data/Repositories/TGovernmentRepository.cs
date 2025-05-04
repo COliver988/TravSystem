@@ -15,6 +15,7 @@ public class TGovernmentRepository : ITGovernmentRepository
 
     public async Task<List<TGovernment>> GetAll() => await _context.Governments.ToListAsync();
     public async Task<TGovernment?> GetByID(int id) => await _context.Governments.Where(s => s.Id == id).FirstOrDefaultAsync();
+    public async Task<TGovernment?> GetByHexCode(string hexcode) => await _context.Governments.Where(s => s.HexCode == hexcode).FirstOrDefaultAsync();
     public async Task<TGovernment> Add(TGovernment government)
     {
         _context.Governments.Add(government);

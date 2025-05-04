@@ -15,6 +15,7 @@ public class TLawLevelRepository : ITLawLevelRepository
 
     public async Task<List<TLawLevel>> GetAll() => await _context.LawLevels.ToListAsync();
     public async Task<TLawLevel?> GetByID(int id) => await _context.LawLevels.Where(s => s.Id == id).FirstOrDefaultAsync();
+    public async Task<TLawLevel?> GetByHexCode(string hexcode) => await _context.LawLevels.Where(s => s.HexCode == hexcode).FirstOrDefaultAsync();
     public async Task<TLawLevel> Add(TLawLevel lawlevel)
     {
         _context.LawLevels.Add(lawlevel);
