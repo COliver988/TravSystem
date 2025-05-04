@@ -12,6 +12,8 @@ namespace MyEfCoreApp.Data
         public DbSet<TStarport> Starports { get; set; }
         public DbSet<TSubSector> SubSectors { get; set; }
         public DbSet<TGovernment> Governments { get; set; }
+        public DbSet<TBase> Bases { get; set; }
+        public DbSet<TPlanetTBases> PlanetBases { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -39,6 +41,9 @@ namespace MyEfCoreApp.Data
                 .WithMany()                // Assuming TAtmosphere does not have a collection of TPlanets
                 .HasForeignKey(p => p.TGovernmentId) // Foreign key
                 .OnDelete(DeleteBehavior.Restrict); // Optional: Configure delete behavior
+            modelBuilder.Entity<TPlanet>()
+                .HasMany(p => p.Bases)
+                .WithMany(b => b.Planets);
             modelBuilder.Entity<TSystem>()
                 .HasOne(s => s.SubSector)
                 .WithMany()

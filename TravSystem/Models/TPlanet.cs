@@ -27,4 +27,6 @@ public class TPlanet
     public TLawLevel? LawLevel { get; set; }
 
     public TSubSector? SubSector { get; set; }
+
+    public List<TBase> Bases { get; set; } = new List<TBase>();
 }
