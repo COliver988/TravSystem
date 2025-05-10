@@ -1,0 +1,77 @@
+﻿@model TravSystem.Models.TradeClassification
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Trade Classification</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Abbreviation" class="control-label"></label>
+                <input asp-for="Abbreviation" class="form-control" />
+                <span asp-validation-for="Abbreviation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Size" class="control-label"></label>
+                <input asp-for="Size" class="form-control" />
+                <span asp-validation-for="Size" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Atmo" class="control-label"></label>
+                <input asp-for="Atmo" class="form-control" />
+                <span asp-validation-for="Atmo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Hydro" class="control-label"></label>
+                <input asp-for="Hydro" class="form-control" />
+                <span asp-validation-for="Hydro" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Population" class="control-label"></label>
+                <input asp-for="Population" class="form-control" />
+                <span asp-validation-for="Population" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Government" class="control-label"></label>
+                <input asp-for="Government" class="form-control" />
+                <span asp-validation-for="Government" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LawLevel" class="control-label"></label>
+                <input asp-for="LawLevel" class="form-control" />
+                <span asp-validation-for="LawLevel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TechLevel" class="control-label"></label>
+                <input asp-for="TechLevel" class="form-control" />
+                <span asp-validation-for="TechLevel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+        <div>
+            <p>Enter data separated by commas: 1,2,4. Leave blank for not applicable</p>
+        </div>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

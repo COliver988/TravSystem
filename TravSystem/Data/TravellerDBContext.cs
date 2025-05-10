@@ -14,6 +14,7 @@ namespace MyEfCoreApp.Data
         public DbSet<TGovernment> Governments { get; set; }
         public DbSet<TBase> Bases { get; set; }
         public DbSet<TPlanetTBases> PlanetBases { get; set; }
+        public DbSet<TradeClassification> TradeClassifications { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
