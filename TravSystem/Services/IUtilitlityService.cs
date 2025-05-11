@@ -5,4 +5,5 @@ public interface IUtilitlityService
     public int DieRoll(int side, int number);
 
     public string IntToHex(int index);
+    public int HexToInt(char hex);
 }

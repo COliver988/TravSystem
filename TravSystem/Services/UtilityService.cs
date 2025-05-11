@@ -24,4 +24,19 @@ public class UtilityService : IUtilitlityService
     {
         return hexcodes.Substring(index, 1);
     }
+
+    public int HexToInt(char hex)
+    {
+        // Find the index of the character in the hexcodes string
+        int index = hexcodes.IndexOf(hex);
+
+        // If the character is not found, throw an exception or handle the error
+        if (index == -1)
+        {
+            throw new ArgumentException($"Invalid hex character: {hex}");
+        }
+
+        return index;
+    }
+
 }
