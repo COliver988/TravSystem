@@ -16,6 +16,7 @@ public class TPlanetsController : Controller
     private readonly ITStarportRepository _starports;
     private readonly ITSubSectorRepository _subSectorRepository;
     private readonly ITPlanetGenService _planetGenService;
+    private readonly ITradeClassiificationService _tradeClassificationService;
 
     public TPlanetsController(ITPlanetRepository repository,
         ITAtmopshereRepository atmopshereRepository,
@@ -23,7 +24,8 @@ public class TPlanetsController : Controller
         ITLawLevelRepository lawLevelRepository,
         ITStarportRepository starportRepository,
         ITSubSectorRepository subSectorRepository,
-        ITPlanetGenService tPlanetGenService)
+        ITPlanetGenService tPlanetGenService,
+        ITradeClassiificationService tradeClassificationService)
     {
         _atmo = atmopshereRepository;
         _repo = repository;
@@ -32,6 +34,7 @@ public class TPlanetsController : Controller
         _starports = starportRepository;
         _subSectorRepository = subSectorRepository;
         _planetGenService = tPlanetGenService;
+        _tradeClassificationService = tradeClassificationService;
     }
 
     // GET: TPlanets
@@ -54,6 +57,11 @@ public class TPlanetsController : Controller
             return NotFound();
         }
 
+        ViewBag.TradeClassifications = await _tradeClassificationService.FindTradeClassifications(tPlanet.UWP);
+        if (ViewBag.TradeClassifications == null)
+        {
+            ViewBag.TradeClassifications = new List<TradeClassification>() { new TradeClassification() { Name = "none" } } ;
+        }
         return View(tPlanet);
     }
 

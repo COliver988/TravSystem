@@ -28,7 +28,7 @@ public class TradeClassificationService : ITradeClassiificationService
         int pop = _utilityService.HexToInt(uwp[4]);
         int govt = _utilityService.HexToInt(uwp[5]);
         int law = _utilityService.HexToInt(uwp[6]);
-        int tech = _utilityService.HexToInt(uwp[7]);
+        int tech = _utilityService.HexToInt(uwp[8]);
         foreach (var t in allTradeClassifications)
         {
             TradeClassification? tc = checkClassification(t, size, atmo, hydro, pop, govt, law, tech);
@@ -43,20 +43,27 @@ public class TradeClassificationService : ITradeClassiificationService
 
     private TradeClassification? checkClassification(TradeClassification t, int size, int atmo, int hydro, int pop, int govt, int law, int tech)
     {
-        if (t.Size != null && !t.Size.Contains(size.ToString()))
+        if (t.Size != null && !convertToIntList(t.Size).Contains(size))
             return null;
-        if (t.Atmo != null && !t.Atmo.Contains(atmo.ToString()))
+        if (t.Atmo != null && !convertToIntList(t.Atmo).Contains(atmo))
             return null;
-        if (t.Hydro != null && !t.Hydro.Contains(hydro.ToString()))
+        if (t.Hydro != null && !convertToIntList(t.Hydro).Contains(hydro))
             return null;
-        if (t.Population != null && !t.Population.Contains(pop.ToString()))
+        if (t.Population != null && !convertToIntList(t.Population).Contains(pop))
             return null;
-        if (t.Government != null && !t.Government.Contains(govt.ToString()))
+        if (t.Government != null && !convertToIntList(t.Government).Contains(govt))
             return null;
-        if (t.LawLevel != null && !t.LawLevel.Contains(law.ToString()))
+        if (t.LawLevel != null && !convertToIntList(t.LawLevel).Contains(law))
             return null;
-        if (t.TechLevel != null && !t.TechLevel.Contains(tech.ToString()))
+        if (t.TechLevel != null && !convertToIntList(t.TechLevel).Contains(tech))
             return null;
         return t;
+    }
+    private List<int> convertToIntList(string codes)
+    {
+        return codes
+            .Split(',') // Split the string by commas
+            .Select(code => int.Parse(code.Trim())) // Trim whitespace and parse each substring to an integer
+            .ToList(); // Convert the result to a List<int>
     }
 }
