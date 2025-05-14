@@ -17,6 +17,7 @@ public class TPlanetsController : Controller
     private readonly ITSubSectorRepository _subSectorRepository;
     private readonly ITPlanetGenService _planetGenService;
     private readonly ITradeClassiificationService _tradeClassificationService;
+    private readonly ITTravelCodeRepository _travelCodeRepository;
 
     public TPlanetsController(ITPlanetRepository repository,
         ITAtmopshereRepository atmopshereRepository,
@@ -25,7 +26,8 @@ public class TPlanetsController : Controller
         ITStarportRepository starportRepository,
         ITSubSectorRepository subSectorRepository,
         ITPlanetGenService tPlanetGenService,
-        ITradeClassiificationService tradeClassificationService)
+        ITradeClassiificationService tradeClassificationService,
+        ITTravelCodeRepository travelCodeRepository)
     {
         _atmo = atmopshereRepository;
         _repo = repository;
@@ -35,6 +37,7 @@ public class TPlanetsController : Controller
         _subSectorRepository = subSectorRepository;
         _planetGenService = tPlanetGenService;
         _tradeClassificationService = tradeClassificationService;
+        _travelCodeRepository = travelCodeRepository;
     }
 
     // GET: TPlanets
@@ -73,6 +76,7 @@ public class TPlanetsController : Controller
         ViewBag.LawLevels = await _lawlevel.GetAll();   
         ViewBag.Starports = await _starports.GetAll();
         ViewBag.SubSectors = await _subSectorRepository.GetAll();
+        ViewBag.TravelCodes = await _travelCodeRepository.GetAll();
         return View();
     }
 
@@ -93,6 +97,7 @@ public class TPlanetsController : Controller
         ViewBag.LawLevels = await _lawlevel.GetAll();   
         ViewBag.Starports = await _starports.GetAll();
         ViewBag.SubSectors = await _subSectorRepository.GetAll();
+        ViewBag.TravelCodes = await _travelCodeRepository.GetAll();
         return View(tPlanet);
     }
 
@@ -110,15 +115,18 @@ public class TPlanetsController : Controller
             return NotFound();
         }
 
+        //TODO: multiple tasks and WhenAll?
         ViewBag.Atmospheres = await _atmo.GetAll();
         ViewBag.Governments = await _government.GetAll();
         ViewBag.LawLevels = await _lawlevel.GetAll();   
         ViewBag.Starports = await _starports.GetAll();
         ViewBag.SubSectors = await _subSectorRepository.GetAll();
+        ViewBag.TravelCodes = await _travelCodeRepository.GetAll();
         return View(tPlanet);
 
     }
 
+    // from the create service
     public async Task<IActionResult> EditPlanet(TPlanet tPlanet)
     {
         if (tPlanet == null)
@@ -136,6 +144,7 @@ public class TPlanetsController : Controller
         ViewBag.LawLevels = await _lawlevel.GetAll();   
         ViewBag.Starports = await _starports.GetAll();
         ViewBag.SubSectors = await _subSectorRepository.GetAll();
+        ViewBag.TravelCodes = await _travelCodeRepository.GetAll();
         return View("Edit", tPlanet);
     }
 
@@ -144,7 +153,7 @@ public class TPlanetsController : Controller
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int id, [Bind("Id,TSubSectorId,Name,TPlanetId,Orbit,TStarportId,Size,TAtmosphereId,THydrographicsId,Population,TGovernmentId,TLawLevelId,TechLevel")] TPlanet tPlanet)
+    public async Task<IActionResult> Edit(int id, TPlanet tPlanet)
     {
         if (id != tPlanet.Id)
         {
@@ -175,6 +184,7 @@ public class TPlanetsController : Controller
         ViewBag.Atmospheres = await _atmo.GetAll();
         ViewBag.Starports = await _starports.GetAll();
         ViewBag.SubSectors = await _subSectorRepository.GetAll();
+        ViewBag.TravelCodes = await _travelCodeRepository.GetAll();
         return View(tPlanet);
     }
 

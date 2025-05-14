@@ -15,6 +15,7 @@ namespace MyEfCoreApp.Data
         public DbSet<TBase> Bases { get; set; }
         public DbSet<TPlanetTBases> PlanetBases { get; set; }
         public DbSet<TradeClassification> TradeClassifications { get; set; }
+        public DbSet<TTravelCode> TravelCodes { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -45,6 +46,10 @@ namespace MyEfCoreApp.Data
             modelBuilder.Entity<TPlanet>()
                 .HasMany(p => p.Bases)
                 .WithMany(b => b.Planets);
+            modelBuilder.Entity<TPlanet>()
+                .HasOne(p => p.TravelCode)
+                .WithMany()
+                .HasForeignKey(p => p.TravelCodeId);
             modelBuilder.Entity<TSystem>()
                 .HasOne(s => s.SubSector)
                 .WithMany()

@@ -12,83 +12,101 @@
     <h4>TPlanet</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             Subsector
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.SubSector.Name)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             Satelite of Planet ID
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.TPlanetId)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             Planet Name
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Name)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Orbit)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Orbit)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Starport.HexCode)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.TStarportId)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Size)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Size)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.TAtmosphereId)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.TAtmosphereId)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Hydrographics)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Hydrographics)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Population)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Population)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.TGovernmentId)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.TGovernmentId)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.TLawLevelId)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.TLawLevelId)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.TechLevel)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.TechLevel)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             UWP
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.UWP)
+        </dd>
+        <dt class="col-sm-2">
+            Travel Code
+        </dt>
+        <dd class="col-sm-10">
+            @{
+                var travelCodeName = Model.TravelCode?.Name;
+                var color = travelCodeName?.ToLower() switch
+                {
+                    "red" => "red",
+                    "amber" => "yellow",
+                    "green" => "green",
+                    _ => "inherit"
+                };
+            }
+            <span style="color:@color">
+                @Html.DisplayFor(model => model.TravelCode.Name)
+            </span>
         </dd>
     </dl>
 </div>
@@ -97,9 +115,9 @@
 <div class="row"
     <ul>
         @if (tradeClassifications != null)
-          foreach (var t in tradeClassifications)
+            foreach (var t in tradeClassifications)
             {
-              <li>@t.Name</li>
+                      <li>@t.Name</li>
             }
     </ul>
 </div

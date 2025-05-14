@@ -22,6 +22,7 @@ builder.Services.AddScoped<ITSubSectorRepository, TSubSectorRepository>();
 builder.Services.AddScoped<ITSystemRepository, TSystemRepository>();
 builder.Services.AddScoped<ITBaseRepository, TBaseRepository>();
 builder.Services.AddScoped<ITradeClassificationRepository, TradeClassificationRepository>();
+builder.Services.AddScoped<ITTravelCodeRepository, TTravelCodeRepository>();
 
 builder.Services.AddScoped<IUtilitlityService, UtilityService>();
 builder.Services.AddScoped<ITPlanetGenService, TPlanetGenService>();    

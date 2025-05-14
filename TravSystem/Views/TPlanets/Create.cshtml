@@ -74,6 +74,12 @@
                 <span asp-validation-for="TechLevel" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="TravelCodeId" class="control-label"></label>
+                <input asp-for="TravelCodeId" class="form-control" />
+                <select asp-for="TravelCodeId" class="form-control" asp-items="@(new SelectList(((IEnumerable<dynamic>)ViewBag.TravelCodes).Select(a => new { Id = a.Id, Name = $"{a.HexCode} {a.Name}" }), "Id", "Name"))"></select>
+                <span asp-validation-for="TGovernmentId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>

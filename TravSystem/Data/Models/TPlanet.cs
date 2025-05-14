@@ -20,6 +20,8 @@ public class TPlanet
 
     public int TechLevel { get; set; }
 
+    public int? TravelCodeId { get; set; }
+
     public string UWP => $"{this.Starport?.HexCode}{this.Size}{this.Atmosphere?.HexCode}{this.Hydrographics}{this.Population}{this.Government?.HexCode}{this.LawLevel?.HexCode}-{hexcodes.Substring(TechLevel, 1)[0]}";
     public TStarport? Starport { get; set; }
     public TAtmosphere? Atmosphere { get; set; }
@@ -27,6 +29,7 @@ public class TPlanet
     public TLawLevel? LawLevel { get; set; }
 
     public TSubSector? SubSector { get; set; }
+    public TTravelCode? TravelCode { get; set; }
 
     public List<TBase> Bases { get; set; } = new List<TBase>();
 }
