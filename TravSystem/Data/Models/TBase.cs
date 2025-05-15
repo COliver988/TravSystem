@@ -7,5 +7,5 @@ public class TBase
     public string Description { get; set; }
     public string HexCode { get; set; }
 
-    public List<TPlanet> Planets { get; set; } = new List<TPlanet>();
+    public ICollection<TSystemTBases> SystemBases { get; set; }
 }

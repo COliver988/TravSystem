@@ -26,15 +26,19 @@ public class TSystemRepository : ITSystemRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task<List<TSystem>> GetAll() => 
+    public async Task<List<TSystem>> GetAll() =>
         await _context.Systems
         .Include(s => s.SubSector)
+        .Include(s => s.SystemBases)
+        .ThenInclude(sb => sb.TBase)
         .ToListAsync();
 
     public async Task<TSystem?> GetByID(int id) =>
         await _context.Systems
-          .Include(s => s.SubSector)
-          .Where(s => s.Id == id).FirstOrDefaultAsync();
+        .Include(s => s.SubSector)
+        .Include(s => s.SystemBases)
+        .ThenInclude(sb => sb.TBase)
+        .Where(s => s.Id == id).FirstOrDefaultAsync();
 
     public async Task<TSystem> Update(TSystem tsystem)
     {

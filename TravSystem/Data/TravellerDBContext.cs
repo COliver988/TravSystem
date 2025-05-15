@@ -13,7 +13,7 @@ namespace MyEfCoreApp.Data
         public DbSet<TSubSector> SubSectors { get; set; }
         public DbSet<TGovernment> Governments { get; set; }
         public DbSet<TBase> Bases { get; set; }
-        public DbSet<TPlanetTBases> PlanetBases { get; set; }
+        public DbSet<TSystemTBases> SystemTBases { get; set; }
         public DbSet<TradeClassification> TradeClassifications { get; set; }
         public DbSet<TTravelCode> TravelCodes { get; set; }
 
@@ -44,17 +44,13 @@ namespace MyEfCoreApp.Data
                 .HasForeignKey(p => p.TGovernmentId) // Foreign key
                 .OnDelete(DeleteBehavior.Restrict); // Optional: Configure delete behavior
             modelBuilder.Entity<TPlanet>()
-                .HasMany(p => p.Bases)
-                .WithMany(b => b.Planets);
-            modelBuilder.Entity<TPlanet>()
                 .HasOne(p => p.TravelCode)
                 .WithMany()
                 .HasForeignKey(p => p.TravelCodeId);
             modelBuilder.Entity<TSystem>()
                 .HasOne(s => s.SubSector)
                 .WithMany()
-                .HasForeignKey(p => p.SubSectorId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .HasForeignKey(p => p.SubSectorId);
         }
     }
 }

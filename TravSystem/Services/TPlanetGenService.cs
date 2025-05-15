@@ -35,7 +35,6 @@ public class TPlanetGenService : ITPlanetGenService
         planet.Name = "New Planet";
         planet.Starport = GenerateStarport();
         planet.TStarportId = planet.Starport.Id;
-        planet.Bases = await GenerateBases(planet.Starport);
         planet.Size = _utilityService.DieRoll(6, 2) - 2;
         int atmo = _utilityService.DieRoll(6, 2) - 7 + planet.Size;
         TAtmosphere atmosphere = await _atmosphereRepository.GetByHexCode(_utilityService.IntToHex(atmo));
@@ -62,6 +61,7 @@ public class TPlanetGenService : ITPlanetGenService
                         .FirstOrDefault() ?? new TStarport();
     }
 
+    //TODO: move to system generation?
     private async Task<List<TBase>> GenerateBases(TStarport port)
     {
         List<TBase> bases = new List<TBase>();

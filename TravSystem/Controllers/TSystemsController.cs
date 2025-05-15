@@ -9,11 +9,13 @@ namespace TravSystem.Controllers
     {
         private readonly ITSystemRepository _repo;
         private readonly ITSubSectorRepository _subsector;
+        private readonly ITBaseRepository _baseRepo;
 
-        public TSystemsController(ITSystemRepository repo, ITSubSectorRepository subsector)
+        public TSystemsController(ITSystemRepository repo, ITSubSectorRepository subsector, ITBaseRepository baseRepo)
         {
             _repo = repo;
             _subsector = subsector;
+            _baseRepo = baseRepo;
         }
 
         // GET: TSystems
@@ -41,8 +43,10 @@ namespace TravSystem.Controllers
         }
 
         // GET: TSystems/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            ViewBag.Subsectors = await _subsector.GetAll();
+            ViewBag.Bases = await _baseRepo.GetAll();
             return View();
         }
 
@@ -75,6 +79,7 @@ namespace TravSystem.Controllers
                 return NotFound();
             }
             ViewBag.Subsectors = await _subsector.GetAll();
+            ViewBag.Bases = await _baseRepo.GetAll();
             return View(tSystem);
         }
 
@@ -109,6 +114,8 @@ namespace TravSystem.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewBag.Subsectors = await _subsector.GetAll();
+            ViewBag.Bases = await _baseRepo.GetAll();
             return View(tSystem);
         }
 

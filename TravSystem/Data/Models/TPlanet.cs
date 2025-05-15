@@ -31,5 +31,4 @@ public class TPlanet
     public TSubSector? SubSector { get; set; }
     public TTravelCode? TravelCode { get; set; }
 
-    public List<TBase> Bases { get; set; } = new List<TBase>();
 }
