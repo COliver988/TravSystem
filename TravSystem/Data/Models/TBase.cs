@@ -8,4 +8,5 @@ public class TBase
     public string HexCode { get; set; }
 
     public ICollection<TSystemTBases> SystemBases { get; set; }
+    public ICollection<TSystem> Systems { get; set; }
 }

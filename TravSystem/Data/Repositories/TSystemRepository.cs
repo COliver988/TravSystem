@@ -40,6 +40,14 @@ public class TSystemRepository : ITSystemRepository
         .ThenInclude(sb => sb.TBase)
         .Where(s => s.Id == id).FirstOrDefaultAsync();
 
+    public async Task<List<int>> GetSystemBaseIds(int systemId)
+    {
+        return await _context.SystemTBases.Where(st => st.TSystemId == systemId)
+            .AsNoTracking()
+            .Select(st => st.TBaseId)
+            .ToListAsync();
+    }
+
     public async Task<TSystem> Update(TSystem tsystem)
     {
         _context.Systems.Update(tsystem);

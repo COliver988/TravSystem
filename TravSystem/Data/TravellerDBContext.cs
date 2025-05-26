@@ -16,6 +16,9 @@ namespace MyEfCoreApp.Data
         public DbSet<TSystemTBases> SystemTBases { get; set; }
         public DbSet<TradeClassification> TradeClassifications { get; set; }
         public DbSet<TTravelCode> TravelCodes { get; set; }
+        public DbSet<TSettings> Settings { get; set; }
+        public DbSet<TStellarTypes> StellarTypes { get; set; }
+        public DbSet<TStellarZones> StellarZones { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -51,6 +54,27 @@ namespace MyEfCoreApp.Data
                 .HasOne(s => s.SubSector)
                 .WithMany()
                 .HasForeignKey(p => p.SubSectorId);
+            modelBuilder.Entity<TSystem>()
+                .HasMany(s => s.Bases)
+                .WithMany(b => b.Systems)
+                .UsingEntity<TSystemTBases>(
+                    j => j
+                        .HasOne(pt => pt.TBase)
+                        .WithMany(t => t.SystemBases)
+                        .HasForeignKey(pt => pt.TBaseId),
+                    j => j
+                        .HasOne(pt => pt.TSystem)
+                        .WithMany(p => p.SystemBases)
+                        .HasForeignKey(pt => pt.TSystemId),
+                    j =>
+                    {
+                        j.HasKey(t => new { t.TSystemId, t.TBaseId });
+                    });
+            modelBuilder.Entity<TStellarTypes>()
+                .HasMany(st => st.StellarZones)
+                .WithOne(sz => sz.TStellarType)
+                .HasForeignKey(sz => sz.TStellarTypeId)
+                .OnDelete(DeleteBehavior.Cascade); // Optional: Configure delete behavior
         }
     }
 }

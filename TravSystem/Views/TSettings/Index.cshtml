@@ -1,0 +1,83 @@
+﻿@model IEnumerable<TravSystem.Models.TSettings>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StellarDensity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StellerSolo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StellerBinary)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StellerTrinary)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GasGiantPresent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GasGiantCount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlanetoidBeltPresent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlanetoidBeltCount)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StellarDensity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StellerSolo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StellerBinary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StellerTrinary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GasGiantPresent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GasGiantCount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlanetoidBeltPresent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlanetoidBeltCount)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

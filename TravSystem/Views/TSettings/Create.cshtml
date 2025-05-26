@@ -1,0 +1,78 @@
+﻿@model TravSystem.Models.TSettings
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>TSettings</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Settings Name (Classic, Mongoose, etc)</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StellarDensity" class="control-label">Stellar Density</label>
+                <select asp-for="StellarDensity" class="form-control">
+                    <option value="Sparse">Sparse</option>
+                    <option value="Standard">Standard</option>
+                    <option value="Dense">Dense</option>
+                </select>
+                <span asp-validation-for="StellarDensity" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="StellerSolo" class="control-label">Stellar Solo range (e.g., 2-7)</label>
+                <input asp-for="StellerSolo" class="form-control" />
+                <span asp-validation-for="StellerSolo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StellerBinary" class="control-label">Stellar Binary range (e.g., 9-11)</label>
+                <input asp-for="StellerBinary" class="form-control" />
+                <span asp-validation-for="StellerBinary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StellerTrinary" class="control-label">Stellar Trinary Range (eg., 12)</label>
+                <input asp-for="StellerTrinary" class="form-control" />
+                <span asp-validation-for="StellerTrinary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GasGiantPresent" class="control-label"></label>
+                <input asp-for="GasGiantPresent" class="form-control" />
+                <span asp-validation-for="GasGiantPresent" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GasGiantCount" class="control-label">Max gas giants</label>
+                <input asp-for="GasGiantCount" class="form-control" />
+                <span asp-validation-for="GasGiantCount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PlanetoidBeltPresent" class="control-label"></label>
+                <input asp-for="PlanetoidBeltPresent" class="form-control" />
+                <span asp-validation-for="PlanetoidBeltPresent" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PlanetoidBeltCount" class="control-label">Max belt count</label>
+                <input asp-for="PlanetoidBeltCount" class="form-control" />
+                <span asp-validation-for="PlanetoidBeltCount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

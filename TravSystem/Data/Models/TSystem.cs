@@ -12,7 +12,6 @@ public class TSystem
     IEnumerable<TPlanet> Planets { get; set; }
     public TSubSector? SubSector { get; set; }
 
-    public List<int> SelectedBaseIds { get; set; } = new List<int>();
-    public ICollection<TBase> Bases { get; set; }
-    public ICollection<TSystemTBases> SystemBases { get; set; }
+    public ICollection<TBase?> Bases { get; set; } = new List<TBase>();
+    public ICollection<TSystemTBases>? SystemBases { get; set; }
 }

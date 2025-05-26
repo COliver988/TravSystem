@@ -88,7 +88,7 @@ namespace TravSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,SubSectorId,Name")] TSystem tSystem)
+        public async Task<IActionResult> Edit(int id, TSystem tSystem, List<int> selectedBaseTypeIds)
         {
             if (id != tSystem.Id)
             {
@@ -99,6 +99,15 @@ namespace TravSystem.Controllers
             {
                 try
                 {
+                    List<int> ids = await _repo.GetSystemBaseIds(tSystem.Id);
+                    foreach (var baseId in selectedBaseTypeIds)
+                    {
+                        if (!ids.Contains(baseId))
+                        {
+                            var tBase = await _baseRepo.GetByID(baseId);
+                            tSystem.Bases.Add(tBase);
+                        }
+                    }
                     await _repo.Update(tSystem);
                 }
                 catch (DbUpdateConcurrencyException)
@@ -115,7 +124,6 @@ namespace TravSystem.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewBag.Subsectors = await _subsector.GetAll();
-            ViewBag.Bases = await _baseRepo.GetAll();
             return View(tSystem);
         }
 

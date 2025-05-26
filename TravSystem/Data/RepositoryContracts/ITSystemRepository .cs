@@ -9,4 +9,5 @@ public interface ITSystemRepository
     Task<TSystem> Add(TSystem tsystem);
     Task<TSystem> Update(TSystem tsystem);
     Task Delete(TSystem tsystem);
+    Task<List<int>> GetSystemBaseIds(int systemId);
 }
