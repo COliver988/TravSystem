@@ -22,21 +22,16 @@
                 <input asp-for="Size" class="form-control" />
                 <span asp-validation-for="Size" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="CompanionType" class="control-label"></label>
-                <input asp-for="CompanionType" class="form-control" />
-                <span asp-validation-for="CompanionType" class="text-danger"></span>
+            <h4>Stellar Zones</h4>
+            <div id="stellarZonesContainer">
+                @for (int i = 0; i < Model?.StellarZones.Count; i++)
+                {
+                    <partial name="_StellarZoneEditor" model="Model.StellarZones[i]" />
+                    <input type="hidden" name="StellarZones.Index" value="@i" />
+                }
             </div>
-            <div class="form-group">
-                <label asp-for="CompanionSize" class="control-label"></label>
-                <input asp-for="CompanionSize" class="form-control" />
-                <span asp-validation-for="CompanionSize" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CompanionOrbit" class="control-label"></label>
-                <input asp-for="CompanionOrbit" class="form-control" />
-                <span asp-validation-for="CompanionOrbit" class="text-danger"></span>
-            </div>
+            <button type="button" class="btn btn-secondary" id="addZoneBtn">Add Stellar Zone</button>
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -50,4 +45,24 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    <script>
+            let zoneIndex = @Model.StellarZones.Count;
+            document.getElementById('addZoneBtn').addEventListener('click', function () {
+                const container = document.getElementById('stellarZonesContainer');
+                const template = `
+                    <div class="stellarzone-editor">
+                        <div class="form-group">
+                            <label for="StellarZones_${zoneIndex}__Zone">Zone Type (I/H/O)</label>
+                            <input class="form-control" type="text" name="StellarZones[${zoneIndex}].Zone" id="StellarZones_${zoneIndex}__Zone" />
+                        </div>
+                        <div class="form-group">
+                            <label for="StellarZones_${zoneIndex}__Orbit">Orbit</label>
+                            <input class="form-control" type="text" name="StellarZones[${zoneIndex}].Orbit" id="StellarZones_${zoneIndex}__Orbit" />
+                        </div>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', template);
+                zoneIndex++;
+            });
+    </script>
+ }

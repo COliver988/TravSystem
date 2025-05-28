@@ -40,7 +40,11 @@ namespace TravSystem.Controllers
         // GET: TStellarTypes/Create
         public IActionResult Create()
         {
-            return View();
+            var model = new TStellarTypes
+            {
+                StellarZones = new List<TStellarZones>()
+            };
+            return View(model);
         }
 
         // POST: TStellarTypes/Create
@@ -48,7 +52,7 @@ namespace TravSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Type,Size,CompanionType,CompanionSize,CompanionOrbit")] TStellarTypes tStellarTypes)
+        public async Task<IActionResult> Create(TStellarTypes tStellarTypes)
         {
             if (ModelState.IsValid)
             {

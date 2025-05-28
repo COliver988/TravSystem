@@ -19,42 +19,46 @@
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="StellarDensity" class="control-label"></label>
-                <input asp-for="StellarDensity" class="form-control" />
+                <label asp-for="StellarDensity" class="control-label">Stellar Density</label>
+                <select asp-for="StellarDensity" class="form-control">
+                    <option value="Sparse">Sparse</option>
+                    <option value="Standard">Standard</option>
+                    <option value="Dense">Dense</option>
+                </select>
                 <span asp-validation-for="StellarDensity" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="StellerSolo" class="control-label"></label>
+                <label asp-for="StellerSolo" class="control-label">Solo Range</label>
                 <input asp-for="StellerSolo" class="form-control" />
                 <span asp-validation-for="StellerSolo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="StellerBinary" class="control-label"></label>
+                <label asp-for="StellerBinary" class="control-label">Binary Range</label>
                 <input asp-for="StellerBinary" class="form-control" />
                 <span asp-validation-for="StellerBinary" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="StellerTrinary" class="control-label"></label>
+                <label asp-for="StellerTrinary" class="control-label">Trinary Range</label>
                 <input asp-for="StellerTrinary" class="form-control" />
                 <span asp-validation-for="StellerTrinary" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="GasGiantPresent" class="control-label"></label>
+                <label asp-for="GasGiantPresent" class="control-label">Gas Giant Range</label>
                 <input asp-for="GasGiantPresent" class="form-control" />
                 <span asp-validation-for="GasGiantPresent" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="GasGiantCount" class="control-label"></label>
+                <label asp-for="GasGiantCount" class="control-label">Max Gas Giants</label>
                 <input asp-for="GasGiantCount" class="form-control" />
                 <span asp-validation-for="GasGiantCount" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PlanetoidBeltPresent" class="control-label"></label>
+                <label asp-for="PlanetoidBeltPresent" class="control-label">Planetoid Belt Range</label>
                 <input asp-for="PlanetoidBeltPresent" class="form-control" />
                 <span asp-validation-for="PlanetoidBeltPresent" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PlanetoidBeltCount" class="control-label"></label>
+                <label asp-for="PlanetoidBeltCount" class="control-label">Max Belts</label>
                 <input asp-for="PlanetoidBeltCount" class="form-control" />
                 <span asp-validation-for="PlanetoidBeltCount" class="text-danger"></span>
             </div>
