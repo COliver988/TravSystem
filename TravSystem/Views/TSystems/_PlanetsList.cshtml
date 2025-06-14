@@ -1,0 +1,39 @@
+﻿@model IEnumerable<TravSystem.Models.TPlanet>
+
+@if (Model != null && Model.Any())
+{
+    <h4>Planets</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Orbit</th>
+                <th>Name</th>
+                <th>UWP</th>
+                <th>Population</th>
+                <th>Starport</th>
+                <th>Tech Level</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var planet in Model.OrderBy(p => p.Orbit))
+            {
+                <tr>
+                    <td>@planet.Orbit</td>
+                    <td>
+                        <a asp-controller="TPlanets" asp-action="Details" asp-route-id="@planet.Id">
+                            @planet.Name
+                        </a>
+                    </td>
+                    <td>@planet.UWP</td>
+                    <td>@planet.Population</td>
+                    <td>@planet.Starport?.Name</td>
+                    <td>@planet.TechLevel</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No planets found for this system.</p>
+}

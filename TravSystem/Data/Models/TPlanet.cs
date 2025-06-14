@@ -7,6 +7,7 @@ public class TPlanet
     public int Id { get; set; }
     public string? Name { get; set; }
     public int? TSubSectorId { get; set; }
+    public int? TSystemId { get; set; }
     public int? TPlanetId { get; set; }
     public int Orbit { get; set; }
     public int TStarportId { get; set; }
@@ -30,5 +31,6 @@ public class TPlanet
 
     public TSubSector? SubSector { get; set; }
     public TTravelCode? TravelCode { get; set; }
+    public TSystem? System { get; set; }
 
 }

@@ -9,7 +9,7 @@ public class TSystem
     public int GasGiantCount { get; set; }
     public int PopulationModifier { get; set; }
 
-    IEnumerable<TPlanet> Planets { get; set; }
+    public ICollection<TPlanet>? Planets { get; set; }
     public TSubSector? SubSector { get; set; }
 
     public ICollection<TBase?> Bases { get; set; } = new List<TBase>();
