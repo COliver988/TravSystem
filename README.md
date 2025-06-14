@@ -10,4 +10,4 @@ Go to the application directory (Travsystem) in a command prompt way
  - Windows terminal or powershell
    
 enter `dotnet run` and it should start up
-load a browser and go to https://localhost:32769/
+load a browser and go to https://localhost:5269/
