@@ -18,6 +18,9 @@
         </dd>
     </dl>
 </div>
+
+@await Html.PartialAsync("_SystemsList", Model.Systems)
+
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>

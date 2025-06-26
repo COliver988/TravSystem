@@ -1,0 +1,36 @@
+﻿@model IEnumerable<TravSystem.Models.TSystem>
+
+@if (Model != null && Model.Any())
+{
+    <h4>Systems in this SubSector</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Planetoid Belts</th>
+                <th>Gas Giant Count</th>
+                <th>Population Modifier</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var system in Model)
+            {
+                <tr>
+                    <td>@system.Name</td>
+                    <td>@system.PlanetoidBelts</td>
+                    <td>@system.GasGiantCount</td>
+                    <td>@system.PopulationModifier</td>
+                    <td>
+                        <a asp-controller="TSystems" asp-action="Details" asp-route-id="@system.Id" class="btn btn-link">Details</a>
+                        <a asp-controller="TSystems" asp-action="Edit" asp-route-id="@system.Id" class="btn btn-link">Edit</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No systems found for this subsector.</p>
+}

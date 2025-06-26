@@ -28,7 +28,7 @@ namespace TravSystem.Migrations
 
                     b.HasIndex("TSystemId");
 
-                    b.ToTable("TPlanetTSystem");
+                    b.ToTable("TPlanetTSystem", (string)null);
                 });
 
             modelBuilder.Entity("TravSystem.Models.TAtmosphere", b =>
@@ -52,7 +52,7 @@ namespace TravSystem.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Atmospheres");
+                    b.ToTable("Atmospheres", (string)null);
                 });
 
             modelBuilder.Entity("TravSystem.Models.TBase", b =>
@@ -75,7 +75,7 @@ namespace TravSystem.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Bases");
+                    b.ToTable("Bases", (string)null);
                 });
 
             modelBuilder.Entity("TravSystem.Models.TGovernment", b =>
@@ -99,7 +99,7 @@ namespace TravSystem.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Governments");
+                    b.ToTable("Governments", (string)null);
                 });
 
             modelBuilder.Entity("TravSystem.Models.TLawLevel", b =>
@@ -123,7 +123,7 @@ namespace TravSystem.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("LawLevels");
+                    b.ToTable("LawLevels", (string)null);
                 });
 
             modelBuilder.Entity("TravSystem.Models.TPlanet", b =>
@@ -188,7 +188,7 @@ namespace TravSystem.Migrations
 
                     b.HasIndex("TravelCodeId");
 
-                    b.ToTable("Planets");
+                    b.ToTable("Planets", (string)null);
                 });
 
             modelBuilder.Entity("TravSystem.Models.TSettings", b =>
@@ -233,7 +233,7 @@ namespace TravSystem.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Settings");
+                    b.ToTable("Settings", (string)null);
                 });
 
             modelBuilder.Entity("TravSystem.Models.TStarport", b =>
@@ -263,7 +263,7 @@ namespace TravSystem.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Starports");
+                    b.ToTable("Starports", (string)null);
                 });
 
             modelBuilder.Entity("TravSystem.Models.TStellarTypes", b =>
@@ -294,7 +294,7 @@ namespace TravSystem.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("StellarTypes");
+                    b.ToTable("StellarTypes", (string)null);
                 });
 
             modelBuilder.Entity("TravSystem.Models.TStellarZones", b =>
@@ -317,7 +317,7 @@ namespace TravSystem.Migrations
 
                     b.HasIndex("TStellarTypeId");
 
-                    b.ToTable("StellarZones");
+                    b.ToTable("StellarZones", (string)null);
                 });
 
             modelBuilder.Entity("TravSystem.Models.TSubSector", b =>
@@ -332,7 +332,7 @@ namespace TravSystem.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SubSectors");
+                    b.ToTable("SubSectors", (string)null);
                 });
 
             modelBuilder.Entity("TravSystem.Models.TSystem", b =>
@@ -361,7 +361,7 @@ namespace TravSystem.Migrations
 
                     b.HasIndex("SubSectorId");
 
-                    b.ToTable("Systems");
+                    b.ToTable("Systems", (string)null);
                 });
 
             modelBuilder.Entity("TravSystem.Models.TSystemTBases", b =>
@@ -379,7 +379,7 @@ namespace TravSystem.Migrations
 
                     b.HasIndex("TBaseId");
 
-                    b.ToTable("SystemTBases");
+                    b.ToTable("SystemTBases", (string)null);
                 });
 
             modelBuilder.Entity("TravSystem.Models.TTravelCode", b =>
@@ -402,7 +402,7 @@ namespace TravSystem.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TravelCodes");
+                    b.ToTable("TravelCodes", (string)null);
                 });
 
             modelBuilder.Entity("TravSystem.Models.TradeClassification", b =>
@@ -442,7 +442,7 @@ namespace TravSystem.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TradeClassifications");
+                    b.ToTable("TradeClassifications", (string)null);
                 });
 
             modelBuilder.Entity("TPlanetTSystem", b =>

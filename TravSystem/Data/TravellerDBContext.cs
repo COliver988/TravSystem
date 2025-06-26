@@ -54,6 +54,10 @@ namespace MyEfCoreApp.Data
                 .HasOne(p => p.System)
                 .WithMany(s => s.Planets)
                 .HasForeignKey(p => p.TSystemId);
+            modelBuilder.Entity<TSubSector>()
+                .HasMany(s => s.Systems)
+                .WithOne(sys => sys.SubSector)
+                .HasForeignKey(sys => sys.SubSectorId);
             modelBuilder.Entity<TSystem>()
                 .HasOne(s => s.SubSector)
                 .WithMany()

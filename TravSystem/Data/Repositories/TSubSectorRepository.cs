@@ -28,7 +28,8 @@ public class TSubSectorRepository : ITSubSectorRepository
 
     public async Task<List<TSubSector>> GetAll() => await _context.SubSectors.ToListAsync();
 
-    public async Task<TSubSector> GetByID(int id) => await _context.SubSectors.FirstOrDefaultAsync(x => x.Id == id);
+    public async Task<TSubSector> GetByID(int id) => await _context.SubSectors
+        .Include(s => s.Systems).FirstOrDefaultAsync(x => x.Id == id);
 
     public async Task<TSubSector> Update(TSubSector subsector)
     {
