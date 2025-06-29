@@ -55,13 +55,22 @@ namespace TravSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,SubSectorId,Name")] TSystem tSystem)
+        public async Task<IActionResult> Create([Bind("Id,SubSectorId,Name")] TSystem tSystem, List<int> selectedBaseTypeIds)
         {
             if (ModelState.IsValid)
             {
+                // Add selected bases to the system
+                foreach (var baseId in selectedBaseTypeIds)
+                {
+                    var tBase = await _baseRepo.GetByID(baseId);
+                    if (tBase != null)
+                        tSystem.Bases.Add(tBase);
+                }
                 await _repo.Add(tSystem);
                 return RedirectToAction(nameof(Index));
             }
+            ViewBag.Subsectors = await _subsector.GetAll();
+            ViewBag.Bases = await _baseRepo.GetAll();
             return View(tSystem);
         }
 

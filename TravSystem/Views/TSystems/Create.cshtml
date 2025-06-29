@@ -13,14 +13,23 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="SubSectorId" class="control-label"></label>
-                <input asp-for="SubSectorId" class="form-control" />
-                <span asp-validation-for="SubSectorId" class="text-danger"></span>
+                <label asp-for="TSubSectorId" class="control-label"></label>
+                <select asp-for="TSubSectorId" class="form-control"
+                        asp-items="@(new SelectList(ViewBag.Subsectors, "Id", "Name"))">
+                    <option value="">-- Select SubSector --</option>
+                </select>
+                <span asp-validation-for="TSubSectorId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="selectedBaseTypeIds" class="control-label">Bases</label>
+                <select id="selectedBaseTypeIds" name="selectedBaseTypeIds" class="form-control" multiple="multiple"
+                        asp-items="@(new SelectList(ViewBag.Bases, "Id", "Name"))">
+                </select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

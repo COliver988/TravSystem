@@ -14,9 +14,9 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="SubSectorId" class="control-label">Subsector</label>
-                <select asp-for="SubSectorId" class="form-control" asp-items="@(new SelectList(((IEnumerable<dynamic>)ViewBag.SubSectors).Select(a => new { Id = a.Id, Name = a.Name }), "Id", "Name"))"></select>
-                <span asp-validation-for="SubSectorId" class="text-danger"></span>
+                <label asp-for="TSubSectorId" class="control-label">Subsector</label>
+                <select asp-for="TSubSectorId" class="form-control" asp-items="@(new SelectList(((IEnumerable<dynamic>)ViewBag.SubSectors).Select(a => new { Id = a.Id, Name = a.Name }), "Id", "Name"))"></select>
+                <span asp-validation-for="TSubSectorId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>

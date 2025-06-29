@@ -8,5 +8,5 @@ public class TSubSector
     public int Id { get; set; }
     public string Name { get; set; }
 
-    public ICollection<TSystem> Systems { get; set; }
+    public ICollection<TSystem>? Systems { get; set; }
 }

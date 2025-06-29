@@ -57,11 +57,13 @@ namespace MyEfCoreApp.Data
             modelBuilder.Entity<TSubSector>()
                 .HasMany(s => s.Systems)
                 .WithOne(sys => sys.SubSector)
-                .HasForeignKey(sys => sys.SubSectorId);
+                .HasForeignKey(sys => sys.TSubSectorId);
+            /*
             modelBuilder.Entity<TSystem>()
                 .HasOne(s => s.SubSector)
                 .WithMany()
-                .HasForeignKey(p => p.SubSectorId);
+                .HasForeignKey(p => p.TSubSectorId);
+            */
             modelBuilder.Entity<TSystem>()
                 .HasMany(s => s.Bases)
                 .WithMany(b => b.Systems)

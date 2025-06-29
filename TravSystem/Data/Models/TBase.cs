@@ -7,6 +7,6 @@ public class TBase
     public string Description { get; set; }
     public string HexCode { get; set; }
 
-    public ICollection<TSystemTBases> SystemBases { get; set; }
-    public ICollection<TSystem> Systems { get; set; }
+    public ICollection<TSystemTBases>? SystemBases { get; set; }
+    public ICollection<TSystem>? Systems { get; set; }
 }

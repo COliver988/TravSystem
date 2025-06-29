@@ -10,29 +10,14 @@ using MyEfCoreApp.Data;
 namespace TravSystem.Migrations
 {
     [DbContext(typeof(TravellerDBContext))]
-    [Migration("20250504133705_bases")]
-    partial class bases
+    [Migration("20250629193151_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.4");
-
-            modelBuilder.Entity("TBaseTPlanet", b =>
-                {
-                    b.Property<int>("BasesId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("PlanetsId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("BasesId", "PlanetsId");
-
-                    b.HasIndex("PlanetsId");
-
-                    b.ToTable("TBaseTPlanet");
-                });
 
             modelBuilder.Entity("TravSystem.Models.TAtmosphere", b =>
                 {
@@ -168,7 +153,13 @@ namespace TravSystem.Migrations
                     b.Property<int?>("TSubSectorId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("TSystemId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("TechLevel")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("TravelCodeId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -183,24 +174,56 @@ namespace TravSystem.Migrations
 
                     b.HasIndex("TSubSectorId");
 
+                    b.HasIndex("TSystemId");
+
+                    b.HasIndex("TravelCodeId");
+
                     b.ToTable("Planets");
                 });
 
-            modelBuilder.Entity("TravSystem.Models.TPlanetTBases", b =>
+            modelBuilder.Entity("TravSystem.Models.TSettings", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("TBaseId")
+                    b.Property<int>("GasGiantCount")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("TPlanetId")
+                    b.Property<string>("GasGiantPresent")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("PlanetoidBeltCount")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("PlanetoidBeltPresent")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("StellarDensity")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("StellerBinary")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("StellerSolo")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("StellerTrinary")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.ToTable("PlanetBases");
+                    b.ToTable("Settings");
                 });
 
             modelBuilder.Entity("TravSystem.Models.TStarport", b =>
@@ -231,6 +254,60 @@ namespace TravSystem.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Starports");
+                });
+
+            modelBuilder.Entity("TravSystem.Models.TStellarTypes", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("CompanionOrbit")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CompanionSize")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CompanionType")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Size")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("StellarTypes");
+                });
+
+            modelBuilder.Entity("TravSystem.Models.TStellarZones", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Orbit")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("TStellarTypeId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Zone")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TStellarTypeId");
+
+                    b.ToTable("StellarZones");
                 });
 
             modelBuilder.Entity("TravSystem.Models.TSubSector", b =>
@@ -267,29 +344,95 @@ namespace TravSystem.Migrations
                     b.Property<int>("PopulationModifier")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("SubSectorId")
+                    b.Property<int>("TSubSectorId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SubSectorId");
+                    b.HasIndex("TSubSectorId");
 
                     b.ToTable("Systems");
                 });
 
-            modelBuilder.Entity("TBaseTPlanet", b =>
+            modelBuilder.Entity("TravSystem.Models.TSystemTBases", b =>
                 {
-                    b.HasOne("TravSystem.Models.TBase", null)
-                        .WithMany()
-                        .HasForeignKey("BasesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("TSystemId")
+                        .HasColumnType("INTEGER");
 
-                    b.HasOne("TravSystem.Models.TPlanet", null)
-                        .WithMany()
-                        .HasForeignKey("PlanetsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("TBaseId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("TSystemId", "TBaseId");
+
+                    b.HasIndex("TBaseId");
+
+                    b.ToTable("SystemTBases");
+                });
+
+            modelBuilder.Entity("TravSystem.Models.TTravelCode", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TravelCodes");
+                });
+
+            modelBuilder.Entity("TravSystem.Models.TradeClassification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Abbreviation")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Atmo")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Government")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Hydro")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LawLevel")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Population")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Size")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("TechLevel")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TradeClassifications");
                 });
 
             modelBuilder.Entity("TravSystem.Models.TPlanet", b =>
@@ -322,6 +465,14 @@ namespace TravSystem.Migrations
                         .WithMany()
                         .HasForeignKey("TSubSectorId");
 
+                    b.HasOne("TravSystem.Models.TSystem", "System")
+                        .WithMany("Planets")
+                        .HasForeignKey("TSystemId");
+
+                    b.HasOne("TravSystem.Models.TTravelCode", "TravelCode")
+                        .WithMany()
+                        .HasForeignKey("TravelCodeId");
+
                     b.Navigation("Atmosphere");
 
                     b.Navigation("Government");
@@ -331,17 +482,73 @@ namespace TravSystem.Migrations
                     b.Navigation("Starport");
 
                     b.Navigation("SubSector");
+
+                    b.Navigation("System");
+
+                    b.Navigation("TravelCode");
+                });
+
+            modelBuilder.Entity("TravSystem.Models.TStellarZones", b =>
+                {
+                    b.HasOne("TravSystem.Models.TStellarTypes", "TStellarType")
+                        .WithMany("StellarZones")
+                        .HasForeignKey("TStellarTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TStellarType");
                 });
 
             modelBuilder.Entity("TravSystem.Models.TSystem", b =>
                 {
                     b.HasOne("TravSystem.Models.TSubSector", "SubSector")
-                        .WithMany()
-                        .HasForeignKey("SubSectorId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .WithMany("Systems")
+                        .HasForeignKey("TSubSectorId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("SubSector");
+                });
+
+            modelBuilder.Entity("TravSystem.Models.TSystemTBases", b =>
+                {
+                    b.HasOne("TravSystem.Models.TBase", "TBase")
+                        .WithMany("SystemBases")
+                        .HasForeignKey("TBaseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TravSystem.Models.TSystem", "TSystem")
+                        .WithMany("SystemBases")
+                        .HasForeignKey("TSystemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TBase");
+
+                    b.Navigation("TSystem");
+                });
+
+            modelBuilder.Entity("TravSystem.Models.TBase", b =>
+                {
+                    b.Navigation("SystemBases");
+                });
+
+            modelBuilder.Entity("TravSystem.Models.TStellarTypes", b =>
+                {
+                    b.Navigation("StellarZones");
+                });
+
+            modelBuilder.Entity("TravSystem.Models.TSubSector", b =>
+                {
+                    b.Navigation("Systems");
+                });
+
+            modelBuilder.Entity("TravSystem.Models.TSystem", b =>
+                {
+                    b.Navigation("Planets");
+
+                    b.Navigation("SystemBases");
                 });
 #pragma warning restore 612, 618
         }

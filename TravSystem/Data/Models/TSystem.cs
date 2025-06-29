@@ -5,8 +5,8 @@ namespace TravSystem.Models;
 public class TSystem
 {
     public int Id { get; set; }
-    [ForeignKey("SubSectorId")]
-    public int SubSectorId { get; set; }
+
+    public int TSubSectorId { get; set; }
     public string Name { get; set; }
     public int PlanetoidBelts { get; set; }
     public int GasGiantCount { get; set; }
