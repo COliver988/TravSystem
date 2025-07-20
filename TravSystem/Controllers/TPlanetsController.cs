@@ -18,6 +18,7 @@ public class TPlanetsController : Controller
     private readonly ITPlanetGenService _planetGenService;
     private readonly ITradeClassiificationService _tradeClassificationService;
     private readonly ITTravelCodeRepository _travelCodeRepository;
+    private readonly ITSystemRepository _systemRepository;
 
     public TPlanetsController(ITPlanetRepository repository,
         ITAtmopshereRepository atmopshereRepository,
@@ -27,7 +28,8 @@ public class TPlanetsController : Controller
         ITSubSectorRepository subSectorRepository,
         ITPlanetGenService tPlanetGenService,
         ITradeClassiificationService tradeClassificationService,
-        ITTravelCodeRepository travelCodeRepository)
+        ITTravelCodeRepository travelCodeRepository,
+        ITSystemRepository systemRepository)
     {
         _atmo = atmopshereRepository;
         _repo = repository;
@@ -38,6 +40,7 @@ public class TPlanetsController : Controller
         _planetGenService = tPlanetGenService;
         _tradeClassificationService = tradeClassificationService;
         _travelCodeRepository = travelCodeRepository;
+        _systemRepository = systemRepository;
     }
 
     // GET: TPlanets
@@ -77,6 +80,7 @@ public class TPlanetsController : Controller
         ViewBag.Starports = await _starports.GetAll();
         ViewBag.SubSectors = await _subSectorRepository.GetAll();
         ViewBag.TravelCodes = await _travelCodeRepository.GetAll();
+        ViewBag.Systems = await _systemRepository.GetAll();
         return View();
     }
 
@@ -98,6 +102,7 @@ public class TPlanetsController : Controller
         ViewBag.Starports = await _starports.GetAll();
         ViewBag.SubSectors = await _subSectorRepository.GetAll();
         ViewBag.TravelCodes = await _travelCodeRepository.GetAll();
+        ViewBag.Systems = await _systemRepository.GetAll();
         return View(tPlanet);
     }
 
@@ -122,6 +127,7 @@ public class TPlanetsController : Controller
         ViewBag.Starports = await _starports.GetAll();
         ViewBag.SubSectors = await _subSectorRepository.GetAll();
         ViewBag.TravelCodes = await _travelCodeRepository.GetAll();
+        ViewBag.Systems = await _systemRepository.GetAll();
         return View(tPlanet);
 
     }
@@ -145,6 +151,7 @@ public class TPlanetsController : Controller
         ViewBag.Starports = await _starports.GetAll();
         ViewBag.SubSectors = await _subSectorRepository.GetAll();
         ViewBag.TravelCodes = await _travelCodeRepository.GetAll();
+        ViewBag.Systems = await _systemRepository.GetAll();
         return View("Edit", tPlanet);
     }
 

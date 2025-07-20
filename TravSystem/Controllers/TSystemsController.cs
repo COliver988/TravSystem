@@ -55,7 +55,7 @@ namespace TravSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,SubSectorId,Name")] TSystem tSystem, List<int> selectedBaseTypeIds)
+        public async Task<IActionResult> Create(TSystem tSystem, List<int> selectedBaseTypeIds)
         {
             if (ModelState.IsValid)
             {

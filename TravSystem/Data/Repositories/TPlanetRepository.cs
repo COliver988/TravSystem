@@ -28,6 +28,7 @@ public class TPlanetRepository : ITPlanetRepository
         .Include(p => p.LawLevel)
         .Include(p => p.SubSector)
         .Include(p => p.TravelCode)
+        .Include(p => p.System)
         .Where(p => p.Id == id)
         .FirstOrDefaultAsync();
 
@@ -40,6 +41,7 @@ public class TPlanetRepository : ITPlanetRepository
         .Include(p => p.SubSector)
         .Include(p => p.LawLevel)
         .Include(p => p.TravelCode)
+        .Include(p => p.System)
         .ToListAsync();
 
     public async Task<TPlanet> Update(TPlanet planet)

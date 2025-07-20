@@ -19,6 +19,11 @@
                 <span asp-validation-for="TSubSectorId" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="TSystemId" class="control-label">System</label>
+                <select asp-for="TSystemId" class="form-control" asp-items="@(new SelectList(((IEnumerable<dynamic>)ViewBag.Systems).Select(a => new { Id = a.Id, Name = a.Name }), "Id", "Name"))"></select>
+                <span asp-validation-for="TSystemId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="TPlanetId" class="control-label"></label>
                 <input asp-for="TPlanetId" class="form-control" />
                 <span asp-validation-for="TPlanetId" class="text-danger"></span>
