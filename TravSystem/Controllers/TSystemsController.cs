@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using TravSystem.Data.Repositories;
 using TravSystem.Models;
+using TravSystem.Services;
 
 namespace TravSystem.Controllers
 {
@@ -10,12 +11,17 @@ namespace TravSystem.Controllers
         private readonly ITSystemRepository _repo;
         private readonly ITSubSectorRepository _subsector;
         private readonly ITBaseRepository _baseRepo;
+        private readonly ITSystemGenService _systemGenService;
 
-        public TSystemsController(ITSystemRepository repo, ITSubSectorRepository subsector, ITBaseRepository baseRepo)
+        public TSystemsController(ITSystemRepository repo, 
+            ITSubSectorRepository subsector, 
+            ITBaseRepository baseRepo,
+            ITSystemGenService tSystemGenService)
         {
             _repo = repo;
             _subsector = subsector;
             _baseRepo = baseRepo;
+            _systemGenService = tSystemGenService;
         }
 
         // GET: TSystems
@@ -73,6 +79,14 @@ namespace TravSystem.Controllers
             ViewBag.Bases = await _baseRepo.GetAll();
             return View(tSystem);
         }
+
+        [HttpGet("GenerateSystem")]
+        public async Task<IActionResult> GenerateSystem(int id)
+        {
+            TSystem system = await _systemGenService.GenerateSystemFromMainPlanet(id);
+            return RedirectToAction(nameof(Details), new { id = system.Id });
+        }
+
 
         // GET: TSystems/Edit/5
         public async Task<IActionResult> Edit(int? id)

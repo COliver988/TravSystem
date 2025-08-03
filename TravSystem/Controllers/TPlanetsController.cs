@@ -218,6 +218,16 @@ public class TPlanetsController : Controller
         return View(tPlanet);
     }
 
+    public IActionResult GenerateSystem(int id)
+    {
+        return RedirectToRoute(new
+        {
+            controller = "TSystems",
+            action = "GenerateSystem",
+            id = id
+        });
+    }
+
     // POST: TPlanets/Delete/5
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]

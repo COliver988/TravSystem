@@ -43,10 +43,10 @@
             @Html.DisplayFor(model => model.Orbit)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Starport.HexCode)
+            Starport
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TStarportId)
+            @Html.DisplayFor(model => model.Starport.HexCode)  @Html.DisplayFor(model => model.Starport.Name)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Size)
@@ -55,10 +55,10 @@
             @Html.DisplayFor(model => model.Size)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TAtmosphereId)
+            Atmosphere
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TAtmosphereId)
+            @Html.DisplayFor(model => model.Atmosphere.Name)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Hydrographics)
@@ -73,16 +73,16 @@
             @Html.DisplayFor(model => model.Population)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TGovernmentId)
+            Government 
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TGovernmentId)
+            @Html.DisplayFor(model => model.Government.HexCode) @Html.DisplayFor(model => model.Government.Name)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TLawLevelId)
+            Law Level
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TLawLevelId)
+            @Html.DisplayFor(model => model.LawLevel.HexCode) @Html.DisplayFor(model => model.LawLevel.Name)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.TechLevel)
@@ -129,5 +129,6 @@
 </div
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="GenerateSystem" asp-route-id="@Model?.Id">Generate System</a> |
     <a asp-action="Index">Back to List</a>
 </div>

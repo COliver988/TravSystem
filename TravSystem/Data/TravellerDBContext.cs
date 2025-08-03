@@ -47,6 +47,10 @@ namespace MyEfCoreApp.Data
                 .HasForeignKey(p => p.TGovernmentId) // Foreign key
                 .OnDelete(DeleteBehavior.Restrict); // Optional: Configure delete behavior
             modelBuilder.Entity<TPlanet>()
+                .HasOne(p => p.LawLevel)
+                .WithMany()
+                .HasForeignKey(p => p.TLawLevelId);
+            modelBuilder.Entity<TPlanet>()
                 .HasOne(p => p.TravelCode)
                 .WithMany()
                 .HasForeignKey(p => p.TravelCodeId);
