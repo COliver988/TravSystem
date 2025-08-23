@@ -1,0 +1,101 @@
+﻿@model IEnumerable<TravSystem.Models.TSystemFeature>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Roll)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BasicNature)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrimaryType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrimarySize)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CompanionType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CompanionSize)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CompanionOrbit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaxOrbits)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GasGiantPresent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GasGiantQty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BeltPresent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BeltQty)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Roll)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BasicNature)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrimaryType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrimarySize)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompanionType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompanionSize)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompanionOrbit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaxOrbits)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GasGiantPresent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GasGiantQty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BeltPresent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BeltQty)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

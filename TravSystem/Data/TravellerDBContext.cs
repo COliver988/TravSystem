@@ -19,6 +19,7 @@ namespace MyEfCoreApp.Data
         public DbSet<TSettings> Settings { get; set; }
         public DbSet<TStellarTypes> StellarTypes { get; set; }
         public DbSet<TStellarZones> StellarZones { get; set; }
+        public DbSet<TSystemFeature> SystemFeatures { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

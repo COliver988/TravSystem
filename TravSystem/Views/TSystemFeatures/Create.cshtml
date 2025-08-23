@@ -1,0 +1,94 @@
+﻿@model TravSystem.Models.TSystemFeature
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>System Features</h1>
+
+<h4>TSystemFeature</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Roll" class="control-label"></label>
+                <input asp-for="Roll" class="form-control" />
+                <span asp-validation-for="Roll" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BasicNature" class="control-label">Basic Nature</label>
+                <select asp-for="BasicNature" class="form-control"
+                        asp-items="@(ViewBag.NumberOfStarsList)">
+                    <option value="">-- Select Basic Nature --</option>
+                </select>
+                <span asp-validation-for="BasicNature" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PrimaryType" class="control-label">Primary Type</label>
+                <input asp-for="PrimaryType" class="form-control" />
+                <span asp-validation-for="PrimaryType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PrimarySize" class="control-label">Primary Size</label>
+                <input asp-for="PrimarySize" class="form-control" />
+                <span asp-validation-for="PrimarySize" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CompanionType" class="control-label">Companion Type</label>
+                <input asp-for="CompanionType" class="form-control" />
+                <span asp-validation-for="CompanionType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CompanionSize" class="control-label">Companion Size</label>
+                <input asp-for="CompanionSize" class="form-control" />
+                <span asp-validation-for="CompanionSize" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CompanionOrbit" class="control-label">Companion Orbit</label>
+                <select id="CompanionOrbit" name="CompanionOrbit" class="form-control"
+                        asp-items="@(ViewBag.OrbitsList)">
+                    <option value="">-- Select Companion Orbit --</option>
+                </select>
+                <span asp-validation-for="CompanionOrbit" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaxOrbits" class="control-label"></label>
+                <input asp-for="MaxOrbits" class="form-control" />
+                <span asp-validation-for="MaxOrbits" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="GasGiantPresent" /> @Html.DisplayNameFor(model => model.GasGiantPresent)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="GasGiantQty" class="control-label"></label>
+                <input asp-for="GasGiantQty" class="form-control" />
+                <span asp-validation-for="GasGiantQty" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="BeltPresent" /> @Html.DisplayNameFor(model => model.BeltPresent)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="BeltQty" class="control-label"></label>
+                <input asp-for="BeltQty" class="form-control" />
+                <span asp-validation-for="BeltQty" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
