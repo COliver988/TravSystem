@@ -88,6 +88,15 @@ namespace TravSystem.Controllers
             {
                 return NotFound();
             }
+            ViewBag.NumberOfStarsList = Enum.GetValues(typeof(TSystemFeature.NumberOfStars))
+                .Cast<TSystemFeature.NumberOfStars>()
+                .Select(e => new SelectListItem { Value = e.ToString(), Text = e.ToString() })
+                .ToList();
+
+            ViewBag.OrbitsList = Enum.GetValues(typeof(TSystemFeature.Orbits))
+                .Cast<TSystemFeature.Orbits>()
+                .Select(e => new SelectListItem { Value = e.ToString(), Text = e.ToString() })
+                .ToList();
             return View(tSystemFeature);
         }
 
@@ -107,6 +116,11 @@ namespace TravSystem.Controllers
             {
                 try
                 {
+                    // Convert CompanionOrbit to string if it's not already
+                    if (Enum.TryParse<TSystemFeature.Orbits>(tSystemFeature.CompanionOrbit, out var orbitEnum))
+                    {
+                        tSystemFeature.CompanionOrbit = orbitEnum.ToString();
+                    }
                     await _repo.Upsert(tSystemFeature);
                 }
                 catch (DbUpdateConcurrencyException)

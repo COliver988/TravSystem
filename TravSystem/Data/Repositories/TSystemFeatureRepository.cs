@@ -16,10 +16,7 @@ public class TSystemFeatureRepository : ITSystemFeaturesRepository
 
     public async Task<List<TSystemFeature>> GetAll() => await _context.SystemFeatures.ToListAsync();
 
-    public Task<TSystemFeature?> GetByID(int id)
-    {
-        throw new NotImplementedException();
-    }
+    public async Task<TSystemFeature?> GetByID(int id) => await _context.SystemFeatures.FindAsync(id) ?? null;
 
     public async Task<TSystemFeature> Upsert(TSystemFeature systemFeature)
     {
