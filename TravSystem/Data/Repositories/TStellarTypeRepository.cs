@@ -32,6 +32,11 @@ public class TStellarTypeRepository : ITStellarTypeRepository
         .Where(st => st.Id == id)
         .FirstOrDefaultAsync();
 
+    public async Task<TStellarTypes?> GetByTypeAndSize(string type, string size) => await _context.StellarTypes
+        .Include(st => st.StellarZones)
+        .Where(st => st.Type == type && st.Size == size)
+        .FirstOrDefaultAsync();
+
     public async Task<TStellarTypes> Update(TStellarTypes stellarType)
     {
         _context.Update(stellarType);
