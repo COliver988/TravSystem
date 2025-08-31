@@ -83,33 +83,37 @@ namespace TravSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Type,Size,CompanionType,CompanionSize,CompanionOrbit")] TStellarTypes tStellarTypes)
+        public async Task<IActionResult> Edit(int id, TStellarTypes tStellarType)
         {
-            if (id != tStellarTypes.Id)
-            {
+            if (id != tStellarType.Id)
                 return NotFound();
-            }
 
+            tStellarType.StellarZones.RemoveAll(z => z == null); // Remove any null entries
             if (ModelState.IsValid)
             {
-                try
+                // Ensure each zone is linked to the parent type
+                if (tStellarType.StellarZones != null)
                 {
-                    await _repo.Update(tStellarTypes);
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!TStellarTypesExists(tStellarTypes.Id))
+                    foreach (var zone in tStellarType.StellarZones)
                     {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
+                        zone.TStellarTypeId = tStellarType.Id;
                     }
                 }
+
+                // Update the TStellarTypes record and its zones
+                await _repo.Update(tStellarType);
+
+                // Optionally, handle deleted zones (if you support zone removal)
+                // var existingZones = _context.StellarZones.Where(z => z.TStellarTypeId == tStellarType.Id).ToList();
+                // foreach (var ez in existingZones)
+                // {
+                //     if (!tStellarType.StellarZones.Any(z => z.Id == ez.Id))
+                //         _context.StellarZones.Remove(ez);
+                // }
+
                 return RedirectToAction(nameof(Index));
             }
-            return View(tStellarTypes);
+            return View(tStellarType);
         }
 
         // GET: TStellarTypes/Delete/5
