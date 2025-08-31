@@ -2,6 +2,11 @@
 
 <div class="stellarzone-editor">
     <div class="form-group">
+        <label asp-for="StarType" class="control-label">Stellar Type</label>
+        <input asp-for="StarType" class="form-control" />
+        <span asp-validation-for="StarType" class="text-danger"></span>
+    </div>
+    <div class="form-group">
         <label asp-for="Zone" class="control-label"></label>
         <input asp-for="Zone" class="form-control" />
         <span asp-validation-for="Zone" class="text-danger"></span>

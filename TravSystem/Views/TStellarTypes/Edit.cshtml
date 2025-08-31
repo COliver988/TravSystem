@@ -56,6 +56,10 @@
                 <div class="stellarzone-editor">
                     <input type="hidden" name="StellarZones.Index" value="${zoneIndex}" />
                     <div class="form-group">
+                        <label for="StellarZones_${zoneIndex}__Zone">Star Type (B, B5)</label>
+                        <input class="form-control" type="text" name="StellarZones[${zoneIndex}].StarType" id="StellarZones_${zoneIndex}__Zone" />
+                    </div>
+                    <div class="form-group">
                         <label for="StellarZones_${zoneIndex}__Zone">Zone Type (I/H/O)</label>
                         <input class="form-control" type="text" name="StellarZones[${zoneIndex}].Zone" id="StellarZones_${zoneIndex}__Zone" />
                     </div>

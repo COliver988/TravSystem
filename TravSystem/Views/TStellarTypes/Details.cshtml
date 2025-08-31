@@ -30,6 +30,7 @@
     <table class="table">
         <thead>
             <tr>
+                <th>Star</th>
                 <th>Orbit</th>
                 <th>Zone</th>
             </tr>
@@ -38,13 +39,14 @@
             @foreach (var zone in Model.StellarZones)
             {
                 <tr>
+                    <td>@zone.StarType</td>
                     <td>@zone.Orbit</td>
                     <td>@zone.Zone</td>
                 </tr>
             }
         </tbody>
     </table>
-}:metaviewport
+}
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
