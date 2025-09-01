@@ -4,7 +4,7 @@ public class TStellarTypes
 {
     public int Id { get; set; }
 
-    // BAMKGGF
+    // Supergirant, amin sequence, etc
     public string Type { get; set; }
 
     // i1, 1b, II, etc

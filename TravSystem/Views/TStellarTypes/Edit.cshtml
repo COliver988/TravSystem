@@ -46,31 +46,41 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+@{
+    // List of BAMKGF star types
+    var starTypes = new[] { "B0", "B5", "A", "A5", "F0", "F5", "G0", "G5", "K0", "K5", " M0", "M5", "M9" };
+}
+
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script>
-        let zoneIndex = @(Model?.StellarZones?.Count ?? 0);
-        document.getElementById('addZoneBtn').addEventListener('click', function () {
-            const container = document.getElementById('stellarZonesContainer');
-            const template = `
-                <div class="stellarzone-editor">
-                    <input type="hidden" name="StellarZones.Index" value="${zoneIndex}" />
-                    <div class="form-group">
-                        <label for="StellarZones_${zoneIndex}__Zone">Star Type (B, B5)</label>
-                        <input class="form-control" type="text" name="StellarZones[${zoneIndex}].StarType" id="StellarZones_${zoneIndex}__Zone" />
-                    </div>
-                    <div class="form-group">
-                        <label for="StellarZones_${zoneIndex}__Zone">Zone Type (I/H/O)</label>
-                        <input class="form-control" type="text" name="StellarZones[${zoneIndex}].Zone" id="StellarZones_${zoneIndex}__Zone" />
-                    </div>
-                    <div class="form-group">
-                        <label for="StellarZones_${zoneIndex}__Orbit">Orbit</label>
-                        <input class="form-control" type="text" name="StellarZones[${zoneIndex}].Orbit" id="StellarZones_${zoneIndex}__Orbit" />
-                    </div>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+<script>
+    let zoneIndex = @(Model?.StellarZones?.Count ?? 0);
+    document.getElementById('addZoneBtn').addEventListener('click', function () {
+        const container = document.getElementById('stellarZonesContainer');
+        const template = `
+            <div class="stellarzone-editor form-row d-flex align-items-center mb-2">
+                <input type="hidden" name="StellarZones.Index" value="${zoneIndex}" />
+                <div class="col-auto">
+                    <label for="StellarZones_${zoneIndex}__StarType" class="sr-only">Star Type</label>
+                    <select name="StellarZones[${zoneIndex}].StarType" class="form-control" style="min-width: 90px;">
+                        <option value="">Select Star Type</option>
+                        ${["B0", "B5", "A0", "A5", "F0", "F5", "G0", "G5", "K0", "K5", "M0", "M5", "M9"].map(type => `<option value="${type}">${type}</option>`).join("")}
+                    </select>
                 </div>
-            `;
-            container.insertAdjacentHTML('beforeend', template);
-            zoneIndex++;
-        });
+                <div class="col-auto">
+                    <label for="StellarZones_${zoneIndex}__Zone" class="sr-only">Zone</label>
+                    <input class="form-control" type="text" name="StellarZones[${zoneIndex}].Zone" placeholder="Zone (I/H/O)" style="min-width: 90px;" />
+                </div>
+                <div class="col-auto">
+                    <label for="StellarZones_${zoneIndex}__Orbit" class="sr-only">Orbit</label>
+                    <input class="form-control" type="text" name="StellarZones[${zoneIndex}].Orbit" placeholder="Orbit" style="min-width: 90px;" />
+                </div>
+            </div>
+        `;
+        container.insertAdjacentHTML('beforeend', template);
+        zoneIndex++;
+    });
     </script>
 }
