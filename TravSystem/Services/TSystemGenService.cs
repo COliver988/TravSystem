@@ -1,4 +1,5 @@
-﻿using TravSystem.Data.Repositories;
+﻿using TravSystem.Data.DTO;
+using TravSystem.Data.Repositories;
 using TravSystem.Models;
 
 namespace TravSystem.Services;
@@ -44,8 +45,9 @@ public class TSystemGenService : ITSystemGenService
         newSystem.BasicNature = rollSystemFeature().BasicNature.ToString();
 
         // determine stellar type from main planet
-        TStellarTypes stellarType = await DetermineStellarType(mainPlanet);
-        newSystem.TStellarTypeIds = new List<string>() { stellarType.Id.ToString() };
+        StellarDTO stellarType = await DetermineStellarType(mainPlanet);
+        newSystem.TStellarTypeIds = new List<string>() { stellarType.StellarTypeId.ToString() };
+        mainPlanet.Orbit = stellarType.HabitableOrbit;
 
         _systemRepository.Add(newSystem);
         // add the main planet to the new system
@@ -83,12 +85,17 @@ public class TSystemGenService : ITSystemGenService
     /// </summary>
     /// <param name="planet">main system planet</param>
     /// <returns></returns>
-    private async Task<TStellarTypes> DetermineStellarType(TPlanet planet)
+    private async Task<StellarDTO> DetermineStellarType(TPlanet planet)
     {
         int DM = 0;
         if (planet.Population >= 8) DM += 4;
         else if (_utility.HexToInt(planet.Atmosphere.HexCode[0]) >= 4 && _utility.HexToInt(planet.Atmosphere.HexCode[0]) <= 9) DM += 4;
         TSystemFeature feature = rollSystemFeature(DM);
-        return await _stellarTypeRepository.GetByTypeAndSize(feature.PrimaryType, feature.PrimarySize);
+
+        //temp for testing - need to figure out data consistency
+        string type = "B0";
+        string size = "Ia";
+        return await _stellarTypeRepository.GetByTypeAndSize(type, size);
+        //return await _stellarTypeRepository.GetByTypeAndSize(feature.PrimaryType, feature.PrimarySize);
     }
 }

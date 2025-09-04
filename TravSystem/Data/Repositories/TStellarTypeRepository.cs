@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyEfCoreApp.Data;
+using TravSystem.Data.DTO;
 using TravSystem.Models;
 
 namespace TravSystem.Data.Repositories;
@@ -32,10 +33,17 @@ public class TStellarTypeRepository : ITStellarTypeRepository
         .Where(st => st.Id == id)
         .FirstOrDefaultAsync();
 
-    public async Task<TStellarTypes?> GetByTypeAndSize(string type, string size) => await _context.StellarTypes
-        .Include(st => st.StellarZones)
-        .Where(st => st.Type == type && st.Size == size)
-        .FirstOrDefaultAsync();
+    public async Task<StellarDTO?> GetByTypeAndSize(string type, string size)
+    { 
+        TStellarTypes stellarType = await _context.StellarTypes.Where(s => s.Size == size).FirstOrDefaultAsync();
+        if (stellarType == null) return null;
+        TStellarZones zone = await _context.StellarZones
+            .Where(z => z.TStellarTypeId == stellarType.Id && z.StarType == type && z.Zone == "H")
+            .FirstOrDefaultAsync();
+        if (zone == null) return null;
+        StellarDTO dto = new StellarDTO() { Type = type, Size = size, HabitableOrbit = zone.Orbit, StellarTypeId = stellarType.Id };
+        return dto;
+    }
 
     public async Task<TStellarTypes> Update(TStellarTypes stellarType)
     {
