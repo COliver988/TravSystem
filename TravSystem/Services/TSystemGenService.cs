@@ -95,7 +95,7 @@ public class TSystemGenService : ITSystemGenService
         //temp for testing - need to figure out data consistency
         string type = "B0";
         string size = "Ia";
-        return await _stellarTypeRepository.GetByTypeAndSize(type, size);
+        return new StellarDTO();
         //return await _stellarTypeRepository.GetByTypeAndSize(feature.PrimaryType, feature.PrimarySize);
     }
 }
