@@ -13,4 +13,5 @@ public class TStellarZones
     public int HabitableZone { get; set; }
 
     public TStellarTypes? TStellarType { get; set; } // Navigation property to TStellarTypes
+    public StarType? StarType { get; set; } // Navigation property to StarType
 }

@@ -25,6 +25,7 @@ builder.Services.AddScoped<ITradeClassificationRepository, TradeClassificationRe
 builder.Services.AddScoped<ITTravelCodeRepository, TTravelCodeRepository>();
 builder.Services.AddScoped<ITSettingsRepository, TSettingsRepository>();
 builder.Services.AddScoped<ITStellarTypeRepository, TStellarTypeRepository>();
+builder.Services.AddScoped<ITStellarZonesRepository, TStellarZonesRepository>();
 builder.Services.AddScoped<ITSystemFeaturesRepository, TSystemFeatureRepository>();
 builder.Services.AddScoped<IStarTypeRepository, StarTypeRepository>();
 

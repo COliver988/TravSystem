@@ -11,6 +11,7 @@ public class TSystemGenService : ITSystemGenService
     private readonly ITSubSectorRepository _subSectorRepository;
     private readonly ITStellarTypeRepository _stellarTypeRepository;
     private readonly ITSystemFeaturesRepository _systemFeaturesRepository;
+    private readonly ITStellarZonesRepository _stellarZonesRepository;
     private readonly IUtilitlityService _utility;
     private List<TSystemFeature> _features;
 
@@ -19,13 +20,15 @@ public class TSystemGenService : ITSystemGenService
         ITSubSectorRepository subSectorRepository,
         ITStellarTypeRepository stellarTypeRepository,
         ITSystemFeaturesRepository systemFeaturesRepository,
-        IUtilitlityService utilitlityService)
+        IUtilitlityService utilitlityService,
+        ITStellarZonesRepository tStellarZonesRepository)
     {
         _planetRepository = planetRepository;
         _systemRepository = systemRepository;
         _subSectorRepository = subSectorRepository;
         _stellarTypeRepository = stellarTypeRepository;
         _systemFeaturesRepository = systemFeaturesRepository;
+        _stellarZonesRepository = tStellarZonesRepository;
         _utility = utilitlityService;
     }
     /// <summary>
@@ -90,12 +93,21 @@ public class TSystemGenService : ITSystemGenService
         int DM = 0;
         if (planet.Population >= 8) DM += 4;
         else if (_utility.HexToInt(planet.Atmosphere.HexCode[0]) >= 4 && _utility.HexToInt(planet.Atmosphere.HexCode[0]) <= 9) DM += 4;
-        TSystemFeature feature = rollSystemFeature(DM);
 
-        //temp for testing - need to figure out data consistency
-        string type = "B0";
-        string size = "Ia";
-        return new StellarDTO();
-        //return await _stellarTypeRepository.GetByTypeAndSize(feature.PrimaryType, feature.PrimarySize);
+        // type
+        TSystemFeature feature = rollSystemFeature(DM);
+        string type = feature.PrimaryType;
+        // size
+        feature = rollSystemFeature(DM);
+        string size = feature.PrimarySize;
+
+        // get the stellar type
+        TStellarZones? stellarZones = await _stellarZonesRepository.GetBySizeAndType(size, type);
+        return new StellarDTO()
+        {
+            Type = type,
+            Size = size,
+            HabitableOrbit = stellarZones != null ? stellarZones.HabitableZone : 4,
+        };
     }
 }
