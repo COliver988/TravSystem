@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using MyEfCoreApp.Data;
 using TravSystem.Data.Repositories;
 using TravSystem.Models;
 

@@ -4,7 +4,7 @@ namespace TravSystem.Data.Repositories;
 
 public interface ITPlanetRepository
 {
-    Task <TPlanet?> GetByID(int id);
+    Task<TPlanet?> GetByID(int id);
     Task<List<TPlanet>> GetAll();
     Task<List<TPlanet>> GetBySubsectorID(int id);
     Task<TPlanet> Add(TPlanet planet);

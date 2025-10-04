@@ -13,8 +13,8 @@ namespace TravSystem.Controllers
         private readonly ITBaseRepository _baseRepo;
         private readonly ITSystemGenService _systemGenService;
 
-        public TSystemsController(ITSystemRepository repo, 
-            ITSubSectorRepository subsector, 
+        public TSystemsController(ITSystemRepository repo,
+            ITSubSectorRepository subsector,
             ITBaseRepository baseRepo,
             ITSystemGenService tSystemGenService)
         {
@@ -183,7 +183,7 @@ namespace TravSystem.Controllers
 
         private bool TSystemExists(int id)
         {
-            return _repo.GetByID(id) != null;   
+            return _repo.GetByID(id) != null;
         }
     }
 }

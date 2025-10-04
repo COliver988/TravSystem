@@ -13,8 +13,8 @@ public class TPlanetGenService : ITPlanetGenService
     ITGovernmentRepository _governmentRepository;
     ITLawLevelRepository _lawLevelRepository;
 
-    public TPlanetGenService(ITStarportRepository starportRepository, 
-        IUtilitlityService utilityService, 
+    public TPlanetGenService(ITStarportRepository starportRepository,
+        IUtilitlityService utilityService,
         ITBaseRepository baseRepository,
         ITAtmopshereRepository tAtmopshereRepository,
         ITGovernmentRepository tGovernmentRepository,

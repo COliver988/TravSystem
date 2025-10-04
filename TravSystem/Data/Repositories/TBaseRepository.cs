@@ -11,7 +11,7 @@ public class TBaseRepository : ITBaseRepository
     public TBaseRepository(TravellerDBContext context)
     {
         _context = context;
-    } 
+    }
 
     public async Task<TBase> Add(TBase tbase)
     {

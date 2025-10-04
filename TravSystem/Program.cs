@@ -30,7 +30,7 @@ builder.Services.AddScoped<ITSystemFeaturesRepository, TSystemFeatureRepository>
 builder.Services.AddScoped<IStarTypeRepository, StarTypeRepository>();
 
 builder.Services.AddScoped<IUtilitlityService, UtilityService>();
-builder.Services.AddScoped<ITPlanetGenService, TPlanetGenService>();    
+builder.Services.AddScoped<ITPlanetGenService, TPlanetGenService>();
 builder.Services.AddScoped<ITradeClassiificationService, TradeClassificationService>();
 builder.Services.AddScoped<ITSystemGenService, TSystemGenService>();
 
@@ -40,7 +40,7 @@ var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
-    var dbContext = scope.ServiceProvider.GetRequiredService<TravellerDBContext >();
+    var dbContext = scope.ServiceProvider.GetRequiredService<TravellerDBContext>();
 
     // Check and apply pending migrations
     var pendingMigrations = dbContext.Database.GetPendingMigrations();
