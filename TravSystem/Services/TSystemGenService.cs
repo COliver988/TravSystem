@@ -15,8 +15,8 @@ public class TSystemGenService : ITSystemGenService
     private readonly IUtilitlityService _utility;
     private List<TSystemFeature> _features;
 
-    public TSystemGenService(ITPlanetRepository planetRepository, 
-        ITSystemRepository systemRepository, 
+    public TSystemGenService(ITPlanetRepository planetRepository,
+        ITSystemRepository systemRepository,
         ITSubSectorRepository subSectorRepository,
         ITStellarTypeRepository stellarTypeRepository,
         ITSystemFeaturesRepository systemFeaturesRepository,
@@ -70,7 +70,7 @@ public class TSystemGenService : ITSystemGenService
         int high = _features.Max(f => f.Roll);
 
         // roll the dice, then fit within the range
-        int roll = _utility.DieRoll(6,2) + dm;
+        int roll = _utility.DieRoll(6, 2) + dm;
         if (roll < low) roll = low;
         if (roll > high) roll = high;
 

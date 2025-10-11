@@ -66,7 +66,7 @@ public class TPlanetsController : Controller
         ViewBag.TradeClassifications = await _tradeClassificationService.FindTradeClassifications(tPlanet.UWP);
         if (ViewBag.TradeClassifications == null)
         {
-            ViewBag.TradeClassifications = new List<TradeClassification>() { new TradeClassification() { Name = "none" } } ;
+            ViewBag.TradeClassifications = new List<TradeClassification>() { new TradeClassification() { Name = "none" } };
         }
         return View(tPlanet);
     }
@@ -76,7 +76,7 @@ public class TPlanetsController : Controller
     {
         ViewBag.Atmospheres = await _atmo.GetAll();
         ViewBag.Governments = await _government.GetAll();
-        ViewBag.LawLevels = await _lawlevel.GetAll();   
+        ViewBag.LawLevels = await _lawlevel.GetAll();
         ViewBag.Starports = await _starports.GetAll();
         ViewBag.SubSectors = await _subSectorRepository.GetAll();
         ViewBag.TravelCodes = await _travelCodeRepository.GetAll();
@@ -98,7 +98,7 @@ public class TPlanetsController : Controller
         }
         ViewBag.Atmospheres = await _atmo.GetAll();
         ViewBag.Governments = await _government.GetAll();
-        ViewBag.LawLevels = await _lawlevel.GetAll();   
+        ViewBag.LawLevels = await _lawlevel.GetAll();
         ViewBag.Starports = await _starports.GetAll();
         ViewBag.SubSectors = await _subSectorRepository.GetAll();
         ViewBag.TravelCodes = await _travelCodeRepository.GetAll();
@@ -123,7 +123,7 @@ public class TPlanetsController : Controller
         //TODO: multiple tasks and WhenAll?
         ViewBag.Atmospheres = await _atmo.GetAll();
         ViewBag.Governments = await _government.GetAll();
-        ViewBag.LawLevels = await _lawlevel.GetAll();   
+        ViewBag.LawLevels = await _lawlevel.GetAll();
         ViewBag.Starports = await _starports.GetAll();
         ViewBag.SubSectors = await _subSectorRepository.GetAll();
         ViewBag.TravelCodes = await _travelCodeRepository.GetAll();
@@ -147,7 +147,7 @@ public class TPlanetsController : Controller
 
         ViewBag.Atmospheres = await _atmo.GetAll();
         ViewBag.Governments = await _government.GetAll();
-        ViewBag.LawLevels = await _lawlevel.GetAll();   
+        ViewBag.LawLevels = await _lawlevel.GetAll();
         ViewBag.Starports = await _starports.GetAll();
         ViewBag.SubSectors = await _subSectorRepository.GetAll();
         ViewBag.TravelCodes = await _travelCodeRepository.GetAll();
@@ -241,6 +241,6 @@ public class TPlanetsController : Controller
 
     private async Task<bool> TPlanetExists(int id)
     {
-        return await _repo.GetByID(id) != null;   
+        return await _repo.GetByID(id) != null;
     }
 }

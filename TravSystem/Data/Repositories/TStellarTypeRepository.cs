@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyEfCoreApp.Data;
-using TravSystem.Data.DTO;
 using TravSystem.Models;
 
 namespace TravSystem.Data.Repositories;

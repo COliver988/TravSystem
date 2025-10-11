@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-namespace TravSystem.Models;
+﻿namespace TravSystem.Models;
 
 public class TPlanet
 {

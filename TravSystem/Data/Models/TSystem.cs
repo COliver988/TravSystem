@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Security.Policy;
-
-namespace TravSystem.Models;
+﻿namespace TravSystem.Models;
 
 public class TSystem
 {

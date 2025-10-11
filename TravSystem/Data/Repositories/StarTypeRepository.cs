@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyEfCoreApp.Data;
-using TravSystem.Data.Repositories;
 using TravSystem.Models;
 
 namespace TravSystem.Data.Repositories;
@@ -8,7 +7,7 @@ namespace TravSystem.Data.Repositories;
 public class StarTypeRepository : IStarTypeRepository
 {
     private readonly TravellerDBContext _context;
-   
+
     public StarTypeRepository(TravellerDBContext context)
     {
         _context = context;

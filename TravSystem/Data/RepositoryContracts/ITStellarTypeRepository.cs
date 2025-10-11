@@ -1,5 +1,4 @@
-﻿using TravSystem.Data.DTO;
-using TravSystem.Models;
+﻿using TravSystem.Models;
 
 namespace TravSystem.Data.Repositories;
 

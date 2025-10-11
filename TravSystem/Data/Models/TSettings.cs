@@ -7,9 +7,9 @@ public class TSettings
     public string StellarDensity { get; set; } = "Normal"; // Normal, Sparse, Dense
 
     // range as in 0-7
-    public string StellerSolo { get; set; } 
-    public string StellerBinary { get; set; } 
-    public string StellerTrinary { get; set; } 
+    public string StellerSolo { get; set; }
+    public string StellerBinary { get; set; }
+    public string StellerTrinary { get; set; }
 
     // range: 1-9
     public string GasGiantPresent { get; set; }
