@@ -128,7 +128,18 @@
     </ul>
 </div
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="GenerateSystem" asp-route-id="@Model?.Id">Generate System</a> |
-    <a asp-action="Index">Back to List</a>
+<a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    @{
+        // Support both nullable FK or non-nullable int defaulted to 0.
+        var hasSystem = (Model.TSystemId != null && Model.TSystemId != 0);
+    }
+    @if (!hasSystem)
+    {
+        <a asp-action="GenerateSystem" asp-route-id="@Model.Id">Generate System</a> 
+    }
+    else
+    {
+        <a asp-controller="TSystems" asp-action="Details" asp-route-id="@Model.TSystemId">View System</a> 
+    }
+    | <a asp-action="Index">Back to List</a>
 </div>

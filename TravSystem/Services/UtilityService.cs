@@ -22,6 +22,10 @@ public class UtilityService : IUtilitlityService
 
     public string IntToHex(int index)
     {
+        if (index < 0)
+            index = 0;
+        if (index >= hexcodes.Length)
+            index = hexcodes.Length - 1;
         return hexcodes.Substring(index, 1);
     }
 

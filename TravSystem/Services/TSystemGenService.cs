@@ -51,10 +51,11 @@ public class TSystemGenService : ITSystemGenService
         StellarDTO stellarType = await DetermineStellarType(mainPlanet);
         newSystem.TStellarTypeIds = new List<string>() { stellarType.StellarTypeId.ToString() };
         mainPlanet.Orbit = stellarType.HabitableOrbit;
+        await _planetRepository.Update(mainPlanet);
 
+        newSystem.Planets= new List<TPlanet>() { mainPlanet };
         _systemRepository.Add(newSystem);
         // add the main planet to the new system
-        newSystem.Planets.Add(mainPlanet);
         return newSystem;
     }
 
