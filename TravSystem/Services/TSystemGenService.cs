@@ -1,4 +1,5 @@
-﻿using TravSystem.Data.DTO;
+﻿using NuGet.Packaging;
+using TravSystem.Data.DTO;
 using TravSystem.Data.Repositories;
 using TravSystem.Models;
 
@@ -52,12 +53,15 @@ public class TSystemGenService : ITSystemGenService
         newSystem.TStellarTypeIds = new List<string>() { stellarType.StellarTypeId.ToString() };
         mainPlanet.Orbit = stellarType.HabitableOrbit;
         await _planetRepository.Update(mainPlanet);
+        newSystem.Planets = new List<TPlanet>() { mainPlanet };
 
-        newSystem.Planets= new List<TPlanet>() { mainPlanet };
+        newSystem.PlanetoidBelts = GeneratePlanetoidBelts(newSystem);
+
         _systemRepository.Add(newSystem);
         // add the main planet to the new system
         return newSystem;
     }
+
 
     /// <summary>
     /// roll on the system features table to determine the basic nature of the system
@@ -110,5 +114,10 @@ public class TSystemGenService : ITSystemGenService
             Size = size,
             HabitableOrbit = stellarZones != null ? stellarZones.HabitableZone : 4,
         };
+    }
+
+    private int GeneratePlanetoidBelts(TSystem newSystem)
+    {
+        return 0;
     }
 }
