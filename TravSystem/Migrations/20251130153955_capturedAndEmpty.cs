@@ -27,6 +27,7 @@ namespace TravSystem.Migrations
                     table.PrimaryKey("PK_CapturedAndEmpty", x => x.Id);
                 });
 
+            /* as the tables are so small, and some of these are nullable foreign keys, skipping for now
             migrationBuilder.CreateIndex(
                 name: "IX_StellarZones_StarTypeId",
                 table: "StellarZones",
@@ -39,6 +40,7 @@ namespace TravSystem.Migrations
                 principalTable: "StarTypes",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
+            */
         }
 
         /// <inheritdoc />

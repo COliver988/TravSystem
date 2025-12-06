@@ -1,0 +1,54 @@
+﻿@model TravSystem.Models.TCapturedAndEmpty
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>TCapturedAndEmpty</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="DieRoll" class="control-label"></label>
+                <input asp-for="DieRoll" class="form-control" />
+                <span asp-validation-for="DieRoll" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Captures" /> @Html.DisplayNameFor(model => model.Captures)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="CapturedQty" class="control-label"></label>
+                <input asp-for="CapturedQty" class="form-control" />
+                <span asp-validation-for="CapturedQty" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="EmptyOrbits" /> @Html.DisplayNameFor(model => model.EmptyOrbits)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmptyOrbitsQty" class="control-label"></label>
+                <input asp-for="EmptyOrbitsQty" class="form-control" />
+                <span asp-validation-for="EmptyOrbitsQty" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
