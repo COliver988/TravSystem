@@ -7,9 +7,9 @@ namespace TravSystem.Controllers
 {
     public class TCapturedAndEmptiesController : Controller
     {
-        private readonly ITCapturedAndEmpty _repo;
+        private readonly ITCapturedAndEmptyRepository _repo;
 
-        public TCapturedAndEmptiesController(ITCapturedAndEmpty repo)
+        public TCapturedAndEmptiesController(ITCapturedAndEmptyRepository repo)
         {
             _repo = repo;
         }

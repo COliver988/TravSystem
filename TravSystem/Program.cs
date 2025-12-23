@@ -28,7 +28,7 @@ builder.Services.AddScoped<ITStellarTypeRepository, TStellarTypeRepository>();
 builder.Services.AddScoped<ITStellarZonesRepository, TStellarZonesRepository>();
 builder.Services.AddScoped<ITSystemFeaturesRepository, TSystemFeatureRepository>();
 builder.Services.AddScoped<IStarTypeRepository, StarTypeRepository>();
-builder.Services.AddScoped<ITCapturedAndEmpty, CapturedAndEmpty>();
+builder.Services.AddScoped<ITCapturedAndEmptyRepository, CapturedAndEmptyRepository>();
 
 builder.Services.AddScoped<IUtilitlityService, UtilityService>();
 builder.Services.AddScoped<ITPlanetGenService, TPlanetGenService>();

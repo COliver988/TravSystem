@@ -5,11 +5,11 @@ using TravSystem.Models;
 
 namespace TravSystem.Data.Repositories;
 
-public class CapturedAndEmpty : ITCapturedAndEmpty
+public class CapturedAndEmptyRepository : ITCapturedAndEmptyRepository
 {
     private TravellerDBContext _context;
 
-    public CapturedAndEmpty(TravellerDBContext dbContext)
+    public CapturedAndEmptyRepository(TravellerDBContext dbContext)
     {
         _context = dbContext;
     }

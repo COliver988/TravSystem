@@ -2,7 +2,7 @@
 
 namespace TravSystem.Data.Repositories;
 
-public interface ITCapturedAndEmpty
+public interface ITCapturedAndEmptyRepository
 {
     Task<List<TCapturedAndEmpty>> GetAll();
     Task<TCapturedAndEmpty> GetByID(int id);

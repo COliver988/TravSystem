@@ -1,4 +1,5 @@
 ﻿using NuGet.Packaging;
+using System.ComponentModel;
 using TravSystem.Data.DTO;
 using TravSystem.Data.Repositories;
 using TravSystem.Models;
@@ -14,6 +15,7 @@ public class TSystemGenService : ITSystemGenService
     private readonly ITSystemFeaturesRepository _systemFeaturesRepository;
     private readonly ITStellarZonesRepository _stellarZonesRepository;
     private readonly IUtilitlityService _utility;
+    private readonly ITCapturedAndEmptyRepository _capturedAndEmptyRepository;
     private List<TSystemFeature> _features;
 
     public TSystemGenService(ITPlanetRepository planetRepository,
@@ -22,7 +24,8 @@ public class TSystemGenService : ITSystemGenService
         ITStellarTypeRepository stellarTypeRepository,
         ITSystemFeaturesRepository systemFeaturesRepository,
         IUtilitlityService utilitlityService,
-        ITStellarZonesRepository tStellarZonesRepository)
+        ITStellarZonesRepository tStellarZonesRepository,
+        ITCapturedAndEmptyRepository tCapturedAndEmptyRepository)
     {
         _planetRepository = planetRepository;
         _systemRepository = systemRepository;
@@ -30,6 +33,7 @@ public class TSystemGenService : ITSystemGenService
         _stellarTypeRepository = stellarTypeRepository;
         _systemFeaturesRepository = systemFeaturesRepository;
         _stellarZonesRepository = tStellarZonesRepository;
+        _capturedAndEmptyRepository = tCapturedAndEmptyRepository;
         _utility = utilitlityService;
     }
     /// <summary>
@@ -54,6 +58,9 @@ public class TSystemGenService : ITSystemGenService
         mainPlanet.Orbit = stellarType.HabitableOrbit;
         await _planetRepository.Update(mainPlanet);
         newSystem.Planets = new List<TPlanet>() { mainPlanet };
+
+        // check for empty orbits (will remove existing orbits)
+        int emptyOrbits = await findEmptyOrbits();
 
         newSystem.PlanetoidBelts = GeneratePlanetoidBelts(newSystem);
 
@@ -114,6 +121,24 @@ public class TSystemGenService : ITSystemGenService
             Size = size,
             HabitableOrbit = stellarZones != null ? stellarZones.HabitableZone : 4,
         };
+    }
+
+    private async Task<int> findEmptyOrbits()
+    {
+        int results = 0;
+        List<TCapturedAndEmpty?> capturedAndEmpty = await _capturedAndEmptyRepository.GetAll();
+        if (capturedAndEmpty == null || capturedAndEmpty.Count == 0) { return results; }
+        int minD6 = capturedAndEmpty.Min(c => c != null ? c.DieRoll : 0);
+        int maxD6 = capturedAndEmpty.Max(c => c != null ? c.DieRoll : 0);
+        if (minD6 == 0 && maxD6 == 0) { return results; }
+        int d6 = _utility.DieRoll(maxD6, 1);
+        if (d6 < minD6) { d6 = minD6; }
+        TCapturedAndEmpty? match = capturedAndEmpty.FirstOrDefault(c => c != null && c.DieRoll == d6);
+        if (match == null || !match.EmptyOrbits) { return results;};
+        // we have empty orbits; how many?
+        d6 = _utility.DieRoll(maxD6, 1);
+        if (d6 < minD6) { d6 = minD6; }
+        return capturedAndEmpty.First(c => c != null && c.DieRoll == d6)?.EmptyOrbitsQty ?? 0;
     }
 
     private int GeneratePlanetoidBelts(TSystem newSystem)
