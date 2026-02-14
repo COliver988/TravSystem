@@ -1,0 +1,65 @@
+﻿@model IEnumerable<TravSystem.Models.TWorldData>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>World Data</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.WorldSize)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Volume)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mass)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SurfaceArea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SurfaceGravity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EscapeVelocity)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.WorldSize)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Volume)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mass)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SurfaceArea)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SurfaceGravity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EscapeVelocity)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

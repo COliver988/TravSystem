@@ -1,0 +1,58 @@
+﻿@model TravSystem.Models.TWorldData
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>TWorldData</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="WorldSize" class="control-label"></label>
+                <input asp-for="WorldSize" class="form-control" />
+                <span asp-validation-for="WorldSize" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Volume" class="control-label"></label>
+                <input asp-for="Volume" class="form-control" />
+                <span asp-validation-for="Volume" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Mass" class="control-label"></label>
+                <input asp-for="Mass" class="form-control" />
+                <span asp-validation-for="Mass" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SurfaceArea" class="control-label"></label>
+                <input asp-for="SurfaceArea" class="form-control" />
+                <span asp-validation-for="SurfaceArea" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SurfaceGravity" class="control-label"></label>
+                <input asp-for="SurfaceGravity" class="form-control" />
+                <span asp-validation-for="SurfaceGravity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EscapeVelocity" class="control-label"></label>
+                <input asp-for="EscapeVelocity" class="form-control" />
+                <span asp-validation-for="EscapeVelocity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

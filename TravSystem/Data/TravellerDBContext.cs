@@ -22,6 +22,7 @@ namespace MyEfCoreApp.Data
         public DbSet<TSystemFeature> SystemFeatures { get; set; }
         public DbSet<StarType> StarTypes { get; set; }
         public DbSet<TCapturedAndEmpty> CapturedAndEmpty { get; set; }
+        public DbSet<TWorldData> WorldData { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
