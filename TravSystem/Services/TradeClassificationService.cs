@@ -61,9 +61,14 @@ public class TradeClassificationService : ITradeClassiificationService
     }
     private List<int> convertToIntList(string codes)
     {
-        return codes
-            .Split(',') // Split the string by commas
-            .Select(code => int.Parse(code.Trim())) // Trim whitespace and parse each substring to an integer
-            .ToList(); // Convert the result to a List<int>
+        if (codes.Contains(","))
+            return codes
+                .Split(',') // Split the string by commas
+                .Select(code => _utilityService.HexToInt(code.Trim()[0])) // Trim whitespace and parse each substring to an integer
+                .ToList(); // Convert the result to a List<int>
+        else
+            return codes
+             .Select(c => _utilityService.HexToInt(c.ToString()[0]))
+             .ToList();
     }
 }

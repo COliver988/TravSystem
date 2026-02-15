@@ -16,9 +16,9 @@ public class TPlanetsController : Controller
     private readonly ITStarportRepository _starports;
     private readonly ITSubSectorRepository _subSectorRepository;
     private readonly ITPlanetGenService _planetGenService;
-    private readonly ITradeClassiificationService _tradeClassificationService;
     private readonly ITTravelCodeRepository _travelCodeRepository;
     private readonly ITSystemRepository _systemRepository;
+    private readonly IPlanetDetailsService _detailsService;
 
     public TPlanetsController(ITPlanetRepository repository,
         ITAtmopshereRepository atmopshereRepository,
@@ -27,9 +27,9 @@ public class TPlanetsController : Controller
         ITStarportRepository starportRepository,
         ITSubSectorRepository subSectorRepository,
         ITPlanetGenService tPlanetGenService,
-        ITradeClassiificationService tradeClassificationService,
         ITTravelCodeRepository travelCodeRepository,
-        ITSystemRepository systemRepository)
+        ITSystemRepository systemRepository,
+        IPlanetDetailsService planetDetailsService)
     {
         _atmo = atmopshereRepository;
         _repo = repository;
@@ -38,9 +38,9 @@ public class TPlanetsController : Controller
         _starports = starportRepository;
         _subSectorRepository = subSectorRepository;
         _planetGenService = tPlanetGenService;
-        _tradeClassificationService = tradeClassificationService;
         _travelCodeRepository = travelCodeRepository;
         _systemRepository = systemRepository;
+        _detailsService = planetDetailsService;
     }
 
     // GET: TPlanets
@@ -63,11 +63,7 @@ public class TPlanetsController : Controller
             return NotFound();
         }
 
-        ViewBag.TradeClassifications = await _tradeClassificationService.FindTradeClassifications(tPlanet.UWP);
-        if (ViewBag.TradeClassifications == null)
-        {
-            ViewBag.TradeClassifications = new List<TradeClassification>() { new TradeClassification() { Name = "none" } };
-        }
+        ViewBag.Details = await _detailsService.GetDetails(tPlanet);
         return View(tPlanet);
     }
 

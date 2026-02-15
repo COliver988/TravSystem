@@ -35,6 +35,7 @@ builder.Services.AddScoped<IUtilitlityService, UtilityService>();
 builder.Services.AddScoped<ITPlanetGenService, TPlanetGenService>();
 builder.Services.AddScoped<ITradeClassiificationService, TradeClassificationService>();
 builder.Services.AddScoped<ITSystemGenService, TSystemGenService>();
+builder.Services.AddScoped<IPlanetDetailsService, PlanetDetailsService>();
 
 builder.Services.AddControllersWithViews();
 

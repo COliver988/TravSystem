@@ -3,7 +3,7 @@
 
 @{
     ViewData["Title"] = "Details";
-    var tradeClassifications = ViewBag.TradeClassifications as List<TradeClassification>;
+    var details = ViewBag.Details as Dictionary<string, List<string>>;
 }
 
 <h1>Details</h1>
@@ -117,16 +117,17 @@
     </dl>
 </div>
 
-<h5>Trade Classifications</h5>
-<div class="row"
-    <ul>
-        @if (tradeClassifications != null)
-            foreach (var t in tradeClassifications)
-            {
-                      <li>@t.Name</li>
-            }
-    </ul>
-</div
+@if (details != null)
+{
+    foreach (var kvp in details)
+    {
+        <div class="mb-3">
+            <h5>@kvp.Key</h5>
+            <div>@string.Join(" ", kvp.Value)</div>
+        </div>
+    }
+}
+
 <div>
 <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     @{
