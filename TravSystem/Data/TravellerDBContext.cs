@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using TravSystem.Data.Models;
 using TravSystem.Models;
 
 namespace MyEfCoreApp.Data
@@ -23,6 +24,8 @@ namespace MyEfCoreApp.Data
         public DbSet<StarType> StarTypes { get; set; }
         public DbSet<TCapturedAndEmpty> CapturedAndEmpty { get; set; }
         public DbSet<TWorldData> WorldData { get; set; }
+
+        public DbSet<StellarData> StellarData { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
