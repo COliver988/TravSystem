@@ -96,6 +96,16 @@ namespace MyEfCoreApp.Data
                 .WithOne(sz => sz.TStellarType)
                 .HasForeignKey(sz => sz.TStellarTypeId)
                 .OnDelete(DeleteBehavior.Cascade); // Optional: Configure delete behavior
+            modelBuilder.Entity<StellarData>()
+                .HasOne(sd => sd.StarType)
+                .WithMany()
+                .HasForeignKey(sd => sd.StarTypeId)
+                .OnDelete(DeleteBehavior.Restrict); // Optional: Configure delete behavior
+            modelBuilder.Entity<StellarData>()
+                .HasOne(sd => sd.StellarType)
+                .WithMany()
+                .HasForeignKey(sd => sd.StellarTypeId)
+                .OnDelete(DeleteBehavior.Restrict); // Optional: Configure delete behavior
         }
     }
 }

@@ -1,23 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyEfCoreApp.Data;
+using TravSystem.Data;
 using TravSystem.Data.Models;
 
 namespace TravSystem.Controllers
 {
     public class StellarDatasController : Controller
     {
-        private readonly TravellerDBContext _context;
+        private readonly IStellarDataRepository _repo;
 
-        public StellarDatasController(TravellerDBContext context)
+        public StellarDatasController(IStellarDataRepository repo)
         {
-            _context = context;
+            _repo = repo;
         }
 
         // GET: StellarDatas
         public async Task<IActionResult> Index()
         {
-            return View(await _context.StellarData.ToListAsync());
+            return View(await _repo.GetAllAsync());
         }
 
         // GET: StellarDatas/Details/5
@@ -28,8 +29,7 @@ namespace TravSystem.Controllers
                 return NotFound();
             }
 
-            var stellarData = await _context.StellarData
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var stellarData = await _repo.GetByIdAsync(id.Value);
             if (stellarData == null)
             {
                 return NotFound();
@@ -53,8 +53,7 @@ namespace TravSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(stellarData);
-                await _context.SaveChangesAsync();
+                await _repo.AddAsync(stellarData);
                 return RedirectToAction(nameof(Index));
             }
             return View(stellarData);
@@ -68,7 +67,7 @@ namespace TravSystem.Controllers
                 return NotFound();
             }
 
-            var stellarData = await _context.StellarData.FindAsync(id);
+            var stellarData = await _repo.GetByIdAsync(id.Value);
             if (stellarData == null)
             {
                 return NotFound();
@@ -92,8 +91,7 @@ namespace TravSystem.Controllers
             {
                 try
                 {
-                    _context.Update(stellarData);
-                    await _context.SaveChangesAsync();
+                    await _repo.UpdateAsync(stellarData);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -119,8 +117,7 @@ namespace TravSystem.Controllers
                 return NotFound();
             }
 
-            var stellarData = await _context.StellarData
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var stellarData = await _repo.GetByIdAsync(id.Value);
             if (stellarData == null)
             {
                 return NotFound();
@@ -134,19 +131,17 @@ namespace TravSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var stellarData = await _context.StellarData.FindAsync(id);
+            var stellarData = await _repo.GetByIdAsync(id);
             if (stellarData != null)
             {
-                _context.StellarData.Remove(stellarData);
+                await _repo.DeleteAsync(stellarData);
             }
-
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool StellarDataExists(int id)
         {
-            return _context.StellarData.Any(e => e.Id == id);
+            return _repo.GetByIdAsync(id).Result != null;
         }
     }
 }

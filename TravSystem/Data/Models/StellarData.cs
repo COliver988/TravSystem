@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace TravSystem.Data.Models;
+namespace TravSystem.Models;
 
 public class StellarData
 {
@@ -15,4 +15,6 @@ public class StellarData
     public decimal Radius { get; set; }
     public decimal Mass { get; set; }
 
+    public StarType StarType { get; set; }
+    public TStellarTypes StellarType { get; set; }
 }
