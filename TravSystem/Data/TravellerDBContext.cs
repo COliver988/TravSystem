@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TravSystem.Data.Models;
 using TravSystem.Models;
 
 namespace MyEfCoreApp.Data

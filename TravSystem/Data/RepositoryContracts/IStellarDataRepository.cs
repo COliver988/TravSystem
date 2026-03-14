@@ -1,6 +1,6 @@
-﻿using TravSystem.Data.Models;
+﻿using TravSystem.Models;
 
-namespace TravSystem.Data;
+namespace TravSystem.Data.Repositories;
 
 public interface IStellarDataRepository
 {

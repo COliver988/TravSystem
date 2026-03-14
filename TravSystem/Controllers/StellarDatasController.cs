@@ -2,17 +2,23 @@
 using Microsoft.EntityFrameworkCore;
 using MyEfCoreApp.Data;
 using TravSystem.Data;
-using TravSystem.Data.Models;
+using TravSystem.Data.Repositories;
+using TravSystem.Models;
 
 namespace TravSystem.Controllers
 {
     public class StellarDatasController : Controller
     {
         private readonly IStellarDataRepository _repo;
+        private readonly IStarTypeRepository _starTypeRepository;
+        private readonly ITStellarTypeRepository _stellarTypeRepository;
 
-        public StellarDatasController(IStellarDataRepository repo)
+        public StellarDatasController(IStellarDataRepository repo, ITStellarTypeRepository stellarTypeRepository,
+            IStarTypeRepository starTypeRepository)
         {
             _repo = repo;
+            _stellarTypeRepository = stellarTypeRepository;
+            _starTypeRepository = starTypeRepository;
         }
 
         // GET: StellarDatas
@@ -35,12 +41,15 @@ namespace TravSystem.Controllers
                 return NotFound();
             }
 
+            await LoadSupportingData();
             return View(stellarData);
         }
 
         // GET: StellarDatas/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            // populate dropdowns
+            await LoadSupportingData();
             return View();
         }
 
@@ -56,6 +65,8 @@ namespace TravSystem.Controllers
                 await _repo.AddAsync(stellarData);
                 return RedirectToAction(nameof(Index));
             }
+            // repopulate dropdowns when returning the view on error
+            await LoadSupportingData();
             return View(stellarData);
         }
 
@@ -72,6 +83,7 @@ namespace TravSystem.Controllers
             {
                 return NotFound();
             }
+            await LoadSupportingData();
             return View(stellarData);
         }
 
@@ -106,6 +118,8 @@ namespace TravSystem.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            // repopulate dropdowns when returning the view on error
+            await LoadSupportingData();
             return View(stellarData);
         }
 
@@ -123,6 +137,7 @@ namespace TravSystem.Controllers
                 return NotFound();
             }
 
+            await LoadSupportingData();
             return View(stellarData);
         }
 
@@ -137,6 +152,12 @@ namespace TravSystem.Controllers
                 await _repo.DeleteAsync(stellarData);
             }
             return RedirectToAction(nameof(Index));
+        }
+
+        private async Task LoadSupportingData()
+        {
+            ViewData["StarTypes"] = await _starTypeRepository.GetAll();
+            ViewData["StellarTypes"] = await _stellarTypeRepository.GetAll();
         }
 
         private bool StellarDataExists(int id)

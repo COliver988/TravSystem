@@ -1,4 +1,4 @@
-﻿@model TravSystem.Data.Models.StellarData
+﻿@model TravSystem.Models.StellarData
 
 @{
     ViewData["Title"] = "Details";
@@ -14,13 +14,13 @@
             @Html.DisplayNameFor(model => model.StarTypeId)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.StarTypeId)
+            @(Model?.StarType?.Type ?? "")
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.StellarTypeId)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.StellarTypeId)
+            @(Model?.StellarType?.Type ?? "")
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Magnitude)

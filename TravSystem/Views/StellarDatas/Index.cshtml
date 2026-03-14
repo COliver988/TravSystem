@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TravSystem.Data.Models.StellarData>
+﻿@model IEnumerable<TravSystem.Models.StellarData>
 
 @{
     ViewData["Title"] = "Index";
@@ -40,10 +40,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.StarTypeId)
+                @Html.DisplayFor(modelItem => item.StarType.Type)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.StellarTypeId)
+                 @item.StellarType?.Type (@item.StellarType?.Size)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Magnitude)

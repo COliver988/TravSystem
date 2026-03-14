@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyEfCoreApp.Data;
-using TravSystem.Data.Models;
+using TravSystem.Models;
 
 namespace TravSystem.Data.Repositories;
 
@@ -26,9 +26,15 @@ public class StellarDataRepository : IStellarDataRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task<List<StellarData>> GetAllAsync() => await _context.StellarData.ToListAsync();
+    public async Task<List<StellarData>> GetAllAsync() => await _context.StellarData
+        .Include(s => s.StarType)
+        .Include(s => s.StellarType)
+        .ToListAsync();
 
-    public async Task<StellarData> GetByIdAsync(int id) => await _context.StellarData.Where(p => p.Id == id).FirstOrDefaultAsync();
+    public async Task<StellarData> GetByIdAsync(int id) => await _context.StellarData
+        .Include(s => s.StarType)
+        .Include(s => s.StellarType)
+        .Where(p => p.Id == id).FirstOrDefaultAsync();
 
     public async Task UpdateAsync(StellarData stellarData)
     {

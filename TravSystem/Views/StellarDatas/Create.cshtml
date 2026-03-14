@@ -1,4 +1,4 @@
-﻿@model TravSystem.Data.Models.StellarData
+﻿@model TravSystem.Models.StellarData
 
 @{
     ViewData["Title"] = "Create";
@@ -14,12 +14,16 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="StarTypeId" class="control-label"></label>
-                <input asp-for="StarTypeId" class="form-control" />
+                <select asp-for="StarTypeId" class="form-control" asp-items="@(new SelectList(ViewData["StarTypes"] as IEnumerable<TravSystem.Models.StarType>, "Id", "Type"))">
+                    <option value="">-- select --</option>
+                </select>
                 <span asp-validation-for="StarTypeId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="StellarTypeId" class="control-label"></label>
-                <input asp-for="StellarTypeId" class="form-control" />
+                <select asp-for="StellarTypeId" class="form-control" asp-items="@(new SelectList(ViewData["StellarTypes"] as IEnumerable<TravSystem.Models.TStellarTypes>, "Id", "Type"))">
+                    <option value="">-- select --</option>
+                </select>
                 <span asp-validation-for="StellarTypeId" class="text-danger"></span>
             </div>
             <div class="form-group">

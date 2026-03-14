@@ -12,9 +12,13 @@ public class StellarData
     public decimal Magnitude { get; set; }
     public decimal Luminosity { get; set; }
     public int Temperature { get; set; }
+
+    [DisplayName("Stellar Radius")]
     public decimal Radius { get; set; }
+
+    [DisplayName("Stellar Mass")]
     public decimal Mass { get; set; }
 
-    public StarType StarType { get; set; }
-    public TStellarTypes StellarType { get; set; }
+    public StarType? StarType { get; set; }
+    public TStellarTypes? StellarType { get; set; }
 }
