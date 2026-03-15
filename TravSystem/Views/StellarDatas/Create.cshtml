@@ -21,7 +21,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="StellarTypeId" class="control-label"></label>
-                <select asp-for="StellarTypeId" class="form-control" asp-items="@(new SelectList(ViewData["StellarTypes"] as IEnumerable<TravSystem.Models.TStellarTypes>, "Id", "Type"))">
+                <select asp-for="StellarTypeId" class="form-control" asp-items="@(new SelectList(ViewData["StellarTypes"] as IEnumerable<TravSystem.Models.TStellarTypes>, "Id", "FullDisplayName"))">
                     <option value="">-- select --</option>
                 </select>
                 <span asp-validation-for="StellarTypeId" class="text-danger"></span>
