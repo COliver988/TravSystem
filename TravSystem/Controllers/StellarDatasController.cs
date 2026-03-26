@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyEfCoreApp.Data;
 using TravSystem.Data;
@@ -22,9 +24,22 @@ namespace TravSystem.Controllers
         }
 
         // GET: StellarDatas
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1, int pageSize = 25)
         {
-            return View(await _repo.GetAllAsync());
+            var all = await _repo.GetAllAsync();
+            var count = all.Count;
+            var totalPages = (int)Math.Ceiling(count / (double)pageSize);
+
+            if (page < 1) page = 1;
+            if (page > totalPages) page = totalPages == 0 ? 1 : totalPages;
+
+            var items = all.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+            ViewData["CurrentPage"] = page;
+            ViewData["TotalPages"] = totalPages;
+            ViewData["PageSize"] = pageSize;
+
+            return View(items);
         }
 
         // GET: StellarDatas/Details/5
