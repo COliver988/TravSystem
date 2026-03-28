@@ -1,0 +1,49 @@
+﻿@model TravSystem.Models.TOrbitalDistance
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>TOrbitalDistance</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Orbit" class="control-label"></label>
+                <input asp-for="Orbit" class="form-control" />
+                <span asp-validation-for="Orbit" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AU" class="control-label"></label>
+                <input asp-for="AU" class="form-control" />
+                <span asp-validation-for="AU" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Kilometers" class="control-label"></label>
+                <input asp-for="Kilometers" class="form-control" />
+                <span asp-validation-for="Kilometers" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SolarRadii" class="control-label"></label>
+                <input asp-for="SolarRadii" class="form-control" />
+                <span asp-validation-for="SolarRadii" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

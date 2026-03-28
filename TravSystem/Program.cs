@@ -31,6 +31,7 @@ builder.Services.AddScoped<IStarTypeRepository, StarTypeRepository>();
 builder.Services.AddScoped<ITWorldDataRepository, TWorldDataRepository>();
 builder.Services.AddScoped<ITCapturedAndEmptyRepository, CapturedAndEmptyRepository>();
 builder.Services.AddScoped<IStellarDataRepository, StellarDataRepository>();
+builder.Services.AddScoped<ITOrbitDistanceRepository, ITOrbitDistanceRepository>();
 
 builder.Services.AddScoped<IUtilitlityService, UtilityService>();
 builder.Services.AddScoped<ITPlanetGenService, TPlanetGenService>();

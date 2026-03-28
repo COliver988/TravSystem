@@ -19,6 +19,16 @@ public class PlanetDetailsService : IPlanetDetailsService
 
         return results;
     }
+    
+    public async Task<int> GetOrbitalPeriod(TPlanet planet)
+    {
+        if (planet == null || planet.System == null)
+            return 0;
+
+
+        // 1. get the AU for the planet based on the planet orbit
+        return 1;
+    }
 
     private async Task<List<TradeClassification>> loadTradeClassifications(TPlanet planet)
     {

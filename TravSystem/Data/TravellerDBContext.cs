@@ -23,8 +23,8 @@ namespace MyEfCoreApp.Data
         public DbSet<StarType> StarTypes { get; set; }
         public DbSet<TCapturedAndEmpty> CapturedAndEmpty { get; set; }
         public DbSet<TWorldData> WorldData { get; set; }
-
         public DbSet<StellarData> StellarData { get; set; }
+        public DbSet<TOrbitalDistance> OrbitalDistances { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

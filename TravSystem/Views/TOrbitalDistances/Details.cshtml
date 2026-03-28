@@ -1,0 +1,42 @@
+﻿@model TravSystem.Models.TOrbitalDistance
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>TOrbitalDistance</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Orbit)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Orbit)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AU)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AU)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Kilometers)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Kilometers)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SolarRadii)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SolarRadii)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
