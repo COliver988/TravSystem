@@ -54,7 +54,7 @@ public class TSystemGenService : ITSystemGenService
 
         // determine stellar type from main planet
         StellarDTO stellarType = await DetermineStellarType(mainPlanet);
-        newSystem.TStellarTypeIds = new List<string>() { stellarType.StellarTypeId.ToString() };
+        newSystem.TStellarTypeIds = new List<int>() { stellarType.StellarTypeId }; 
         mainPlanet.Orbit = stellarType.HabitableOrbit;
         await _planetRepository.Update(mainPlanet);
         newSystem.Planets = new List<TPlanet>() { mainPlanet };

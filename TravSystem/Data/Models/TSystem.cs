@@ -13,7 +13,9 @@ public class TSystem
     public string? BasicNature { get; set; } // Solo, Binary, Trinary
 
     // Comma-separated list of TStellarType Ids
-    public List<string> TStellarTypeIds { get; set; }
+    public List<int> TStellarTypeIds { get; set; }
+
+    public List<int> StarTypeIds { get; set; }
 
     public ICollection<TPlanet>? Planets { get; set; }
     public TSubSector? SubSector { get; set; }
@@ -22,4 +24,5 @@ public class TSystem
     public ICollection<TSystemTBases>? SystemBases { get; set; }
 
     public List<TStellarTypes>? StellarTypes { get; set; }
+    public List<StarType>? StarTypes { get; set; }
 }
