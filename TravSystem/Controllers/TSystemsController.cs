@@ -12,16 +12,22 @@ namespace TravSystem.Controllers
         private readonly ITSubSectorRepository _subsector;
         private readonly ITBaseRepository _baseRepo;
         private readonly ITSystemGenService _systemGenService;
+        private readonly IStarTypeRepository _starTypeRepository;
+        private readonly ITStellarTypeRepository _stellarTypeRepository;
 
         public TSystemsController(ITSystemRepository repo,
             ITSubSectorRepository subsector,
             ITBaseRepository baseRepo,
-            ITSystemGenService tSystemGenService)
+            ITSystemGenService tSystemGenService,
+            ITStellarTypeRepository stellarTypeRepository,
+            IStarTypeRepository starTypeRepository)
         {
             _repo = repo;
             _subsector = subsector;
             _baseRepo = baseRepo;
             _systemGenService = tSystemGenService;
+            _stellarTypeRepository = stellarTypeRepository;
+            _starTypeRepository = starTypeRepository;
         }
 
         // GET: TSystems
@@ -53,6 +59,8 @@ namespace TravSystem.Controllers
         {
             ViewBag.Subsectors = await _subsector.GetAll();
             ViewBag.Bases = await _baseRepo.GetAll();
+            ViewBag.StellarTypes = await _stellarTypeRepository.GetAll() ;
+            ViewBag.StarTypes = await _starTypeRepository.GetAll();
             return View();
         }
 
@@ -103,6 +111,8 @@ namespace TravSystem.Controllers
             }
             ViewBag.Subsectors = await _subsector.GetAll();
             ViewBag.Bases = await _baseRepo.GetAll();
+            ViewBag.StellarTypes = await _stellarTypeRepository.GetAll() ;
+            ViewBag.StarTypes = await _starTypeRepository.GetAll();
             return View(tSystem);
         }
 
@@ -111,7 +121,7 @@ namespace TravSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, TSystem tSystem, List<int> selectedBaseTypeIds)
+        public async Task<IActionResult> Edit(int id, TSystem tSystem, List<int> selectedBaseTypeIds, List<int> selectedStarTypeIds)
         {
             if (id != tSystem.Id)
             {

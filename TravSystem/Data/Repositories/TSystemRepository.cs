@@ -31,6 +31,8 @@ public class TSystemRepository : ITSystemRepository
         .Include(s => s.SubSector)
         .Include(s => s.SystemBases)
         .ThenInclude(sb => sb.TBase)
+        .Include(s => s.StellarTypes)
+        .Include(s => s.StarTypes)
         .ToListAsync();
 
     public async Task<TSystem?> GetByID(int id) =>
@@ -48,6 +50,8 @@ public class TSystemRepository : ITSystemRepository
           .ThenInclude(p => p.TravelCode)
         .Include(s => s.SystemBases)
         .ThenInclude(sb => sb.TBase)
+        .Include(s => s.StellarTypes)
+        .Include(s => s.StarTypes)
         .Where(s => s.Id == id).FirstOrDefaultAsync();
 
     public async Task<List<int>> GetSystemBaseIds(int systemId)
