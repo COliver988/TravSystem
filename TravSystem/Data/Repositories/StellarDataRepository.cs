@@ -36,6 +36,9 @@ public class StellarDataRepository : IStellarDataRepository
         .Include(s => s.StellarType)
         .Where(p => p.Id == id).FirstOrDefaultAsync();
 
+    public async Task<StellarData> GetByTypeAndSize(int starTypeId, int stellarTypeId) => await _context.StellarData
+        .Where(p => p.StarTypeId == starTypeId && p.StellarTypeId == stellarTypeId).FirstOrDefaultAsync();
+
     public async Task UpdateAsync(StellarData stellarData)
     {
         await _context.SaveChangesAsync();

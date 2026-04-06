@@ -6,6 +6,7 @@ public interface IStellarDataRepository
 {
     Task<List<StellarData>> GetAllAsync();
     Task<StellarData> GetByIdAsync(int id);
+    Task<StellarData> GetByTypeAndSize(int starTypeId, int stellarTypeId);
     Task<StellarData> AddAsync(StellarData stellarData);
     Task UpdateAsync(StellarData stellarData);
     Task DeleteAsync(StellarData stellarData);
