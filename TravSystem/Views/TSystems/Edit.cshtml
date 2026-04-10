@@ -37,10 +37,21 @@
             <div>
                 <h5>Star Types</h5>
                 <select id="StarTypes" name="selectedStarTypeIds" multiple>
-                    @foreach (var baseType in ViewBag.StarTypes)
+                    @foreach (StarType baseType in ViewBag.StarTypes)
                     {
-                        <option value="@baseType.Id" selected="@Model.Bases.Any(b => b.Id == baseType.Id)">
+                        <option value="@baseType.Id" selected="@Model.StarTypes.Any(b => b.Id == baseType.Id)">
                             @baseType.Type
+                        </option>
+                    }
+                </select>
+            </div>  
+            <div>
+                <h5>Stellar Size</h5>
+                <select id="StellarSizes" name="selectedStarSizeIds" multiple>
+                    @foreach (var baseType in ViewBag.StellarTypes)
+                    {
+                        <option value="@baseType.Id" selected="@Model.StellarTypes.Any(b => b.Id == baseType.Id)">
+                            @baseType.Size @(" ") @baseType.Type
                         </option>
                     }
                 </select>
