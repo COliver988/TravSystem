@@ -69,7 +69,7 @@ namespace TravSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(TSystem tSystem, List<int> selectedBaseTypeIds)
+        public async Task<IActionResult> Create(TSystem tSystem, List<int> selectedBaseTypeIds , List<int> selectedStarTypeIds, List<int> selectedStarSizeIds)
         {
             if (ModelState.IsValid)
             {
@@ -121,7 +121,7 @@ namespace TravSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, TSystem tSystem, List<int> selectedBaseTypeIds, List<int> selectedStarTypeIds)
+        public async Task<IActionResult> Edit(int id, TSystem tSystem, List<int> selectedBaseTypeIds, List<int> selectedStarTypeIds, List<int> selectedStarSizeIds)
         {
             if (id != tSystem.Id)
             {
