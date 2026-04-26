@@ -19,6 +19,7 @@ public class TPlanetsController : Controller
     private readonly ITTravelCodeRepository _travelCodeRepository;
     private readonly ITSystemRepository _systemRepository;
     private readonly IPlanetDetailsService _detailsService;
+    private ITravellerWorldMapForm8 _worldMapService;
 
     public TPlanetsController(ITPlanetRepository repository,
         ITAtmopshereRepository atmopshereRepository,
@@ -29,7 +30,8 @@ public class TPlanetsController : Controller
         ITPlanetGenService tPlanetGenService,
         ITTravelCodeRepository travelCodeRepository,
         ITSystemRepository systemRepository,
-        IPlanetDetailsService planetDetailsService)
+        IPlanetDetailsService planetDetailsService,
+        ITravellerWorldMapForm8 travellerWorldMapForm8)
     {
         _atmo = atmopshereRepository;
         _repo = repository;
@@ -41,6 +43,7 @@ public class TPlanetsController : Controller
         _travelCodeRepository = travelCodeRepository;
         _systemRepository = systemRepository;
         _detailsService = planetDetailsService;
+        _worldMapService = travellerWorldMapForm8;
     }
 
     // GET: TPlanets
@@ -233,6 +236,22 @@ public class TPlanetsController : Controller
         if (tPlanet != null)
             await _repo.Delete(tPlanet);
         return RedirectToAction(nameof(Index));
+    }
+    public IActionResult GetWorldMap(string uwp)
+    {
+        // Generate the data
+        var cells = _worldMapService.Generate(uwp);
+
+        // Render to bitmap
+        using var bitmap = _worldMapService.Render(cells, 500);
+        using var ms = new MemoryStream();
+
+        // Encode to PNG for the web
+        bitmap.Encode(ms, SkiaSharp.SKEncodedImageFormat.Png, 100);
+        var base64 = Convert.ToBase64String(ms.ToArray());
+
+        ViewBag.MapImage = $"data:image/png;base64,{base64}";
+        return PartialView("_WorldMapPartial");
     }
 
     private async Task<bool> TPlanetExists(int id)

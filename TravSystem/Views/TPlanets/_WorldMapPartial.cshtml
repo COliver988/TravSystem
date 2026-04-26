@@ -1,0 +1,14 @@
+﻿@if (ViewBag.MapImage != null)
+{
+    <div class="card mt-4">
+        <div class="card-header bg-dark text-white">
+            <h5 class="mb-0">World Map (Form 8 Projection)</h5>
+        </div>
+        <div class="card-body text-center bg-secondary">
+            <img src="@ViewBag.MapImage" class="img-fluid shadow" alt="Generated World Map" />
+            <div class="mt-2 text-light">
+                <small>Generated based on Hydrographics digit in UWP.</small>
+            </div>
+        </div>
+    </div>
+}

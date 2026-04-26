@@ -128,6 +128,14 @@
     }
 }
 
+<hr />
+<div id="mapContainer">
+    <button id="btnGenerateMap" class="btn btn-primary"
+            data-uwp="@Model.UWP">
+        Generate World Map
+    </button>
+</div>
+
 <div>
 <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     @{
@@ -144,3 +152,25 @@
     }
     | <a asp-action="Index">Back to List</a>
 </div>
+
+@section Scripts {
+    <script>
+        document.getElementById('btnGenerateMap').addEventListener('click', function () {
+            const uwp = this.getAttribute('data-uwp');
+            const container = document.getElementById('mapContainer');
+
+            // Show loading state
+            container.innerHTML = '<div class="spinner-border text-primary" role="status"></div> Loading Map...';
+
+            fetch(`/TPlanets/GetWorldMap?uwp=${uwp}`)
+                .then(response => response.text())
+                .then(html => {
+                    container.innerHTML = html;
+                })
+                .catch(err => {
+                    console.error('Error:', err);
+                    container.innerHTML = '<div class="alert alert-danger">Error generating map.</div>';
+                });
+        });
+    </script>
+}
