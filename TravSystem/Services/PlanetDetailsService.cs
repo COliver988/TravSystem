@@ -6,6 +6,7 @@ namespace TravSystem.Services;
 public class PlanetDetailsService : IPlanetDetailsService
 {
     private readonly ITradeClassiificationService _tradeClassificationService;
+    private readonly ITravellerWorldMapForm8 _travellerWorldMapForm8;
     private readonly IStellarDataRepository _stellarDataRepository;
     ITStellarTypeRepository _stellarTypeRepository;
     private readonly IStarTypeRepository _starTypeRepository;
@@ -15,6 +16,7 @@ public class PlanetDetailsService : IPlanetDetailsService
         IStellarDataRepository stellarDataRepository,
         IStarTypeRepository starTypeRepository,
         ITStellarTypeRepository stellarTypeRepository,
+        ITravellerWorldMapForm8 travellerWorldMapForm8,
         ITOrbitDistanceRepository orbitalDistanceRepository)
     {
         _tradeClassificationService = tradeClassificationService;
@@ -22,6 +24,7 @@ public class PlanetDetailsService : IPlanetDetailsService
         _starTypeRepository = starTypeRepository;
         _starTypeRepository = starTypeRepository;
         _orbitalDistanceRepository = orbitalDistanceRepository;
+        _travellerWorldMapForm8 = travellerWorldMapForm8;
     }
 
     public async Task<Dictionary<string, List<string>>> GetDetails(TPlanet planet)

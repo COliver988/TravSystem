@@ -1,14 +1,13 @@
 ﻿using SkiaSharp;
-using System;
-using System.Collections.Generic;
+using TravSystem.Models;
 
-public class TravellerWorldMapForm8
+namespace TravSystem.Services;
+
+public class TravellerWorldMapForm8 : ITravellerWorldMapForm8
 {
     private const int Triangles = 20;
     private const int HexesPerTriangle = 25;
     private readonly Random _rng = new();
-
-    public record HexCell(int TriangleId, int Q, int R, bool IsWater);
 
     public List<HexCell> Generate(string uwp)
     {

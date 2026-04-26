@@ -40,6 +40,7 @@ try
     builder.Services.AddScoped<ITradeClassiificationService, TradeClassificationService>();
     builder.Services.AddScoped<ITSystemGenService, TSystemGenService>();
     builder.Services.AddScoped<IPlanetDetailsService, PlanetDetailsService>();
+    builder.Services.AddScoped<ITravellerWorldMapForm8, TravellerWorldMapForm8>();
 
     builder.Services.AddControllersWithViews();
 
