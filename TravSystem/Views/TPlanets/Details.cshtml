@@ -131,7 +131,8 @@
 <hr />
 <div id="mapContainer">
     <button id="btnGenerateMap" class="btn btn-primary"
-            data-uwp="@Model.UWP">
+            data-uwp="@Model.UWP",
+            data-name="@Model.Name">
         Generate World Map
     </button>
 </div>
@@ -157,6 +158,7 @@
     <script>
         document.getElementById('btnGenerateMap').addEventListener('click', function () {
             const uwp = this.getAttribute('data-uwp');
+            const name = this.getAttribute('data-name');
             const container = document.getElementById('mapContainer');
 
             // Show loading state

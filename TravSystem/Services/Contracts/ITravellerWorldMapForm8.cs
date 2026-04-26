@@ -5,6 +5,6 @@ namespace TravSystem.Services;
 
 public interface ITravellerWorldMapForm8
 {
-    public List<HexCell> Generate(string uwp);
-    public SKBitmap Render(List<HexCell> cells, int hexSize);
+    public List<HexCell> Generate(string uwp, string worldName);
+    public SKBitmap Render(List<HexCell> cells, string uwp);
 }

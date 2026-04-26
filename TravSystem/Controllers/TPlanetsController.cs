@@ -237,13 +237,13 @@ public class TPlanetsController : Controller
             await _repo.Delete(tPlanet);
         return RedirectToAction(nameof(Index));
     }
-    public IActionResult GetWorldMap(string uwp)
+    public IActionResult GetWorldMap(string uwp, string worldName)
     {
         // Generate the data
-        var cells = _worldMapService.Generate(uwp);
+        var cells = _worldMapService.Generate(uwp, worldName);
 
         // Render to bitmap
-        using var bitmap = _worldMapService.Render(cells, 500);
+        using var bitmap = _worldMapService.Render(cells, uwp);
         using var ms = new MemoryStream();
 
         // Encode to PNG for the web
