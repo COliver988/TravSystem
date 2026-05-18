@@ -127,7 +127,7 @@ public class TravellerWorldMapForm8 : ITravellerWorldMapForm8
 
     private void DrawHex(SKCanvas canvas, float x, float y, float size, bool isWater)
     {
-        using var fill = new SKPaint { Color = isWater ? SKColors.LightBlue : SKColors.LightGray, Style = SKPaintStyle.Fill };
+        using var fill = new SKPaint { Color = isWater ? SKColors.LightBlue : SKColors.LightGreen, Style = SKPaintStyle.StrokeAndFill };
         using var border = new SKPaint { Color = SKColors.DarkGray, Style = SKPaintStyle.Stroke, StrokeWidth = 1 };
 
         var path = new SKPath();

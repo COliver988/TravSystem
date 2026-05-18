@@ -1,9 +1,28 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.10.35201.131
+# Visual Studio Version 18
+VisualStudioVersion = 18.7.11811.120 insiders
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravSystem", "TravSystem\TravSystem.csproj", "{7FE487E7-9753-4E97-811F-1013FD214BC0}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "ClientApp", "ClientApp\", "{AC014D01-BB68-719C-0E66-093897CD85AD}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.VirtualPath = "/localhost_59892"
+		Debug.AspNetCompiler.PhysicalPath = "ClientApp\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_59892\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_59892"
+		Release.AspNetCompiler.PhysicalPath = "ClientApp\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_59892\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "59892"
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +34,10 @@ Global
 		{7FE487E7-9753-4E97-811F-1013FD214BC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FE487E7-9753-4E97-811F-1013FD214BC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FE487E7-9753-4E97-811F-1013FD214BC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC014D01-BB68-719C-0E66-093897CD85AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC014D01-BB68-719C-0E66-093897CD85AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC014D01-BB68-719C-0E66-093897CD85AD}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC014D01-BB68-719C-0E66-093897CD85AD}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
